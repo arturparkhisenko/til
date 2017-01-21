@@ -33,11 +33,9 @@ int main()
 
   result = testAB || testBC || testAC;
 
-  if (result != 0) {
-    cout << "Result: true" << endl;
-  } else {
-    cout << "Result: false" << endl;
-  }
+  const char *resultString = result ? "true" : "false";
+
+  cout << "Result: " << resultString << endl;
 
   return 0;
 }
