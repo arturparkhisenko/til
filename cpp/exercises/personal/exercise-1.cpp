@@ -22,8 +22,8 @@ int main()
   bool numIsEven = num % 2 == 0;
 
   int num1 = num / 100;
-  int num2 = (num / 10) - (num1 * 10);
-  int num3 = num - (num1 * 100) - (num2 * 10);
+  int num2 = (num / 10) % 10;
+  int num3 = num % 10;
 
   if (numIsEven) {
     result = num1 + num2 + num3;

@@ -1,6 +1,6 @@
 // Даны действительные числа x, y (x ≠ y).
-// Меньшее из этих двух чисел заменить их полусуммой,
-// а большее – их удвоенным произведением.
+// Меньшее из этих двух чисел заменить его квадратом,
+// а большее – его произведением с константой (любой).
 
 #include <iostream>
 
@@ -10,12 +10,17 @@ int main()
 {
   int a = 2;
   int b = 4;
+  const int multiplier = 3;
 
-  cout << "a: " << a << " b: " << b << endl;
+  cout << "a: " << a << " b: " << b << " multiplier: " << multiplier << endl;
 
-  int t = a;
-  a = (t + b) / 2;
-  b = (t * b) * 2;
+  if (a < b) {
+    a *= a;
+    b *= multiplier;
+  } else {
+    b *= b;
+    a *= multiplier;
+  }
 
   cout << "a: " << a << " b: " << b << endl;
 
