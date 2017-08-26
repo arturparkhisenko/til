@@ -1,6 +1,6 @@
 # Learning C & C++
 
-​## OS and IDE
+## OS and IDE
 
 - Windows: [Visual Studio](https://www.visualstudio.com/ru/vs/community/)
 - Linux: [Qt Creator](https://www.qt.io/download-open-source/)
