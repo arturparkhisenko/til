@@ -9,7 +9,9 @@
 ## Compilers
 
 [GCC](https://gcc.gnu.org/), [CLang](http://clang.llvm.org/)
-- To compile: `clang++ input.cpp -o output.o`
+- To compile with GCC (c): `gcc input.c -o output.o` (optional param for cpp: `-lstdc++`)
+- To compile with G++ (c++): `g++ input.cpp -o output.o`
+- To compile with CLang: `clang++ input.cpp -o output.o`
 - To run: `./output.o`
 
 ## Url's
