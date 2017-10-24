@@ -1,6 +1,6 @@
-// Даны действительные числа x, y (x ≠ y).
-// Меньшее из этих двух чисел заменить его квадратом,
-// а большее – его произведением с константой (любой).
+// 2 numbers: x, y (x ≠ y).
+// if smallest - return a square of it,
+// if biggest - return a multiplication with any const
 
 #include <iostream>
 

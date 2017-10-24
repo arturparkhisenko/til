@@ -1,0 +1,26 @@
+{
+  "name": "react-redux-stack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/app.js",
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom"
+  },
+  "dependencies": {
+    "normalize.css": "^7.0.0",
+    "redux": "^3.7.2",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "react": "^16.0.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.9.0",
+    "eslint-plugin-react": "^7.4.0",
+    "react-scripts": "^1.0.14"
+  }
+}

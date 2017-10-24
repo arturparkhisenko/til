@@ -1,9 +1,8 @@
-// Даны действительные положительные числа a, b, c, x, y.
-// Выяснить, пройдет ли кирпич с ребрами a, b, c
-// в прямоугольное отверстие со сторонами x и y.
-// Просовывать кирпич в отверстие разрешается только так,
-// чтобы каждое из его ребер было параллельно или
-// перпендикулярно каждой из сторон отверстия.
+// 5 positive numbers: a, b, c, x, y
+// Find, if a box with sides a, b, c
+// could go through a hole with sides x and y
+// Box side must be parallel or perpendicular
+// to each hole side
 
 #include <iostream>
 

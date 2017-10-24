@@ -1,6 +1,6 @@
-// Проверить трехзначное число на четность,
-// если число четное - найти сумму его цифр,
-// если число нечетное - произведение его цифр.
+// Check 3 digit number by parity (even),
+// if even - find a summ of its digits,
+// if odd - find a multiplication of its digits
 
 #include <iostream>
 

@@ -7,7 +7,7 @@ int main()
   // setlocale(0, ""); // use user-prefered locale?
   int a;
   int b;
-  int result;
+  int result = 0;
 
   cout << "Math division: ";
   cout << "First argument: ";

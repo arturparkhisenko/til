@@ -1,5 +1,13 @@
 # [webassembly](http://webassembly.org/)
 
+## TODO
+- https://mbebenita.github.io/WasmExplorer/
+- https://github.com/blaze33/way-of-life/blob/master/src/js/wasm/engine.c
+- [simplest-way-to-get-started-with-webassembly](https://medium.com/@BenedekGagyi/the-simplest-way-to-get-started-with-webassembly-1f92f6f90d24)
+- https://medium.com/@reklatsmasters/webassembly-for-beginners-d3ce859cb007
+- https://medium.com/netscape/javascript-c-modern-ways-to-use-c-in-javascript-projects-a19003c5a9ff
+- https://pspdfkit.com/blog/2017/webassembly-a-new-hope/
+
 ## Requirements
 
 - [CMake](https://cmake.org/)
@@ -25,6 +33,7 @@
 
 ### Articles
 
+- [MDN WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly)
 - [how-to-learn-webassembly](https://medium.com/pandera-labs/learning-how-to-learn-webassembly-7743663ed4d0)
 - [rust-to-webassembly](https://hackernoon.com/compiling-rust-to-webassembly-guide-411066a69fde)
 - [cartoon-introduction](https://www.smashingmagazine.com/2017/05/abridged-cartoon-introduction-webassembly/)
