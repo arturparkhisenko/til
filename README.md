@@ -13,5 +13,6 @@ _2 TILs and counting..._
 ## Categories :milky_way:
 
 - [C & C++](cpp/README.md)
+- JavaScript
 
 ## [MIT License](LICENSE.md)

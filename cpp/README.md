@@ -26,12 +26,17 @@
 
 ## Url's
 
-1. https://code-live.ru/tag/cpp-manual/
-2. http://purecodecpp.com/
-3. http://www.learn-c.org/en/Variables_and_Types
-4. http://www.cprogramming.com/tutorial.html
-5. http://cppstudio.com/ 
+1. [code-live/cpp-manual](https://code-live.ru/tag/cpp-manual/)
+2. [purecodecpp](http://purecodecpp.com/)
+3. [learn-c](http://www.learn-c.org/en/Variables_and_Types)
+4. [cprogramming](http://www.cprogramming.com/tutorial.html)
+5. [cppstudio](http://cppstudio.com/)
+6. [isocpp](https://isocpp.org/)
 
 ## Xcode
 
 Create a `MacOS CommandLineTool` and select language C++.
+
+## Articles
+
+- [C++17 "structured bindings"](https://twitter.com/0x00A/status/935050383726067712?s=09)
