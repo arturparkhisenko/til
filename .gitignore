@@ -67,6 +67,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 $RECYCLE.BIN/
+.package-lock.json
 
 # git credential file #
 #######################

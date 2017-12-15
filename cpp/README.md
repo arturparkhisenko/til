@@ -40,3 +40,4 @@ Create a `MacOS CommandLineTool` and select language C++.
 ## Articles
 
 - [C++17 "structured bindings"](https://twitter.com/0x00A/status/935050383726067712?s=09)
+- [C++11 new features examples, ru](https://habrahabr.ru/post/182920/)
