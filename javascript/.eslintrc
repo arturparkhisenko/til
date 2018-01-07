@@ -11,6 +11,10 @@
     "es6": true,
     "browser": true
   },
+  "globals": {
+    "it": true,
+    "describe": true
+  },
   "rules": {
     "no-console": 0
   }
