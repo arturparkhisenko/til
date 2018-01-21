@@ -12,6 +12,7 @@
 
 - To compile with GCC (c): `gcc input.c -o output.o` (optional param for cpp: `-lstdc++`)
 - To compile with G++ (c++): `g++ input.cpp -o output.o`
+- To compile with G++ (c++11): `g++ -std=c++11 input.cpp -o output.o`
 - To compile with CLang: `clang++ input.cpp -o output.o`
 - To run: `./output.o`
 
