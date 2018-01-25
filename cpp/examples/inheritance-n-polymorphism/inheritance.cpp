@@ -16,4 +16,4 @@ int main() {
   Hulk d;
   d.crush();
 }
-// Outputs "Hi"
+// Outputs "RAWRRR"
