@@ -33,6 +33,8 @@ int main() {
 
   n.attack();
   m.attack();
+
+  return 0;
 }
 
 /* Output:

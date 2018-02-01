@@ -1,12 +1,13 @@
 // Only non-const objects can call non-const functions.
 // A constant object can't call regular functions.
-// Hence, for a constant object to work you need a constant function.
+// For a constant object to work you need a constant function.
 
+#include "my-const-class.h"
 #include <iostream>
-#include "MyConstClass.h"
 using namespace std;
 
 int main() {
-  const MyClass obj;
+  const MyConstClass obj;
   obj.myPrint();
+  return 0;
 }

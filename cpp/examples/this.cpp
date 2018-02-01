@@ -17,6 +17,7 @@ private:
 int main() {
   MyClass obj(42);
   obj.printInfo();
+  return 0;
 }
 
 /* Outputs

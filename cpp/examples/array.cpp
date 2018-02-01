@@ -1,5 +1,5 @@
 #include <iostream>
-#include <limits> // http://en.cppreference.com/w/cpp/types/numeric_limits
+#include <limits>    // http://en.cppreference.com/w/cpp/types/numeric_limits
 using namespace std; // cin, cout, rand
 
 // --------------------------------------
@@ -129,7 +129,6 @@ void Arr::printArr() {
   } else if (length == 0)
     cout << "Your array is empty because of it's zero length" << endl;
   else
-    cout <<
-      "To use this method you need specify array and it's length first"
-      << endl;
+    cout << "To use this method you need specify array and it's length first"
+         << endl;
 }

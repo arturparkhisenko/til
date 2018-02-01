@@ -3,13 +3,13 @@
 
 class Birthday {
 public:
-  Birthday(int m, int d, int y);
+  Birthday(int y, int m, int d);
   void printDate();
 
 private:
+  int year;
   int month;
   int day;
-  int year;
 };
 
 #endif // BIRTHDAY_H

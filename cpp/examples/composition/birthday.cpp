@@ -2,10 +2,8 @@
 #include <iostream>
 using namespace std;
 
-Birthday::Birthday(int m, int d, int y) : month(m), day(d), year(y) {
-
-}
+Birthday::Birthday(int y, int m, int d) : year(y), month(m), day(d) {}
 
 void Birthday::printDate() {
-  cout << month << "/" << day << "/" << year << endl;
+  cout << year << "/" << month << "/" << day << endl;
 }

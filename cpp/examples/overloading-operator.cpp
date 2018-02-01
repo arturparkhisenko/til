@@ -1,4 +1,5 @@
-// Operators that can't be overloaded include :: | .* | . | ?:
+// Operators that can't be overloaded include:
+// .* | :: | . | ?:
 
 #include <iostream>
 using namespace std;

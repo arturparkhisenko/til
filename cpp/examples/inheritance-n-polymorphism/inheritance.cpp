@@ -15,5 +15,7 @@ public:
 int main() {
   Hulk d;
   d.crush();
+
+  return 0;
 }
 // Outputs "RAWRRR"

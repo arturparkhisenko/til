@@ -1,26 +1,24 @@
-// Member Initializers
+// member initializers
 
+// This code returns an error:
 // class MyClass {
 //   public:
 //    MyClass(int a, int b) {
 //     regVar = a;
-//     constVar = b;
+//     constVar = b; // cannot be assigned after declaration
 //    }
 //   private:
 //     int regVar;
-//     const int constVar;
+//     const int constVar; // yep, this is const
 // };
 
-// Running this code returns an error, because one of its member variables is a constant, which cannot be assigned a value after declaration.
-
-// can be replaced with
+// Proper way to do it with member initializers:
 
 class MyClass {
- public:
-  MyClass(int a, int b) : regVar(a), constVar(b)
-  {
-  }
- private:
+public:
+  MyClass(int a, int b) : regVar(a), constVar(b) {}
+
+private:
   int regVar;
   const int constVar;
 };

@@ -10,7 +10,8 @@ int main() {
   // following pointer points to the obj object
   MyClass *ptr = &obj;
 
-  // arrow member selection operator (->) is used to access an object's members with a pointer
+  // arrow member selection operator (->) is used to access an object's members
+  // with a pointer
   ptr->myPrint();
 
   obj.myPrint();

@@ -2,6 +2,4 @@
 #include <iostream>
 using namespace std;
 
-void MyConstClass::myPrint() const {
-  cout <<"Hello"<<endl;
-}
+void MyConstClass::myPrint() const { cout << "Hello" << endl; }

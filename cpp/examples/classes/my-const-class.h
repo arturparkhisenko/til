@@ -1,5 +1,4 @@
-class MyConstClass
-{
-  public:
-    void myPrint() const;
+class MyConstClass {
+public:
+  void myPrint() const;
 };
