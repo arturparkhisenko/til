@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Emscripten-Generated Code</title>
+  <style>
+    #status {
+      height: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="status" style="border:1px solid #000; min-height: 3px; min-width: 30px;">Downloading...</div>
+  <br>
+  <textarea id="output" rows="8" cols="50"></textarea>
+  <br>
+  <h5>JS2WASM</h5>
+  <p>try 22, then 30, then 22 again 😉</p>
+  <label>🚧 enter value &lt; 38 🚧<br/>
+    <input type="text" id="txtValue" value="22" />
+  </label>
+  <button onclick="passValue();">Pass Value</button>
+  <button onclick="testPerf();">Test Perf</button>
+
+  <script type="text/javascript">
+    var statusElement = document.getElementById('status');
+
+    var Module = {
+      preRun: [],
+      postRun: [],
+      print: (function() {
+        var element = document.getElementById('output');
+        if (element) element.value = ''; // clear browser cache
+        return function(text) {
+          if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+          console.log(text);
+          if (element) {
+            element.value += text + "\n";
+            element.scrollTop = element.scrollHeight; // focus on bottom
+          }
+        };
+      })(),
+      printErr: function(text) {
+        if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+        if (0) { // XXX disabled for safety typeof dump == 'function') {
+          dump(text + '\n'); // fast, straight to the real console
+        } else {
+          console.error(text);
+        }
+      },
+      setStatus: function(text) {
+        if (!Module.setStatus.last) Module.setStatus.last = {
+          time: Date.now(),
+          text: ''
+        };
+        if (text === Module.setStatus.text) return;
+        var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
+        var now = Date.now();
+        if (m && now - Date.now() < 30) return; // if this is a progress update, skip it if too soon
+        statusElement.innerHTML = text;
+      },
+      totalDependencies: 0,
+      monitorRunDependencies: function(left) {
+        this.totalDependencies = Math.max(this.totalDependencies, left);
+        Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies - left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+      }
+    };
+    Module.setStatus('Downloading...');
+    window.onerror = function() {
+      Module.setStatus('Exception thrown, see JavaScript console');
+      Module.setStatus = function(text) {
+        if (text) Module.printErr('[post-exception status] ' + text);
+      };
+    };
+
+    // polyfill api without emsdk
+    Module.exports = {};
+    Module.ccall = (name, // name of C function
+      returnType = null, //return type
+      argsTypes = ['number'], //argument types
+      args = [parseInt(elTxt.value, 10)] // arguments
+    ) => Module.exports[`_${name}`].apply(window, args);
+
+    // cleanup, loaded below
+    Module.setStatus('Loaded!');
+  </script>
+
+  <!-- not needed here, it's not a template -->
+  <!-- {{{ SCRIPT }}} -->
+
+  <script>
+    // handmade env for the module
+    const memory = new WebAssembly.Memory({
+      initial: 256,
+      maximum: 256
+    });
+    const env = {
+      abortStackOverflow: _ => {
+        throw new Error('overflow');
+      },
+      table: new WebAssembly.Table({
+        initial: 0,
+        maximum: 0,
+        element: 'anyfunc'
+      }),
+      tableBase: 0,
+      memory: memory,
+      memoryBase: 1024,
+      STACKTOP: 0,
+      STACK_MAX: memory.buffer.byteLength,
+    };
+    const importObject = {
+      env
+    };
+
+    // ----------------------------------
+    // This function is useful if it is necessary
+    // to a compile a module before it can be instantiated
+    // (otherwise, the WebAssembly.instantiate() function should be used).
+
+    function instantiate(bytes, imports) {
+      return WebAssembly.compile(bytes).then(m => new WebAssembly.Instance(m, imports));
+    }
+
+    fetch('fib-module.wasm').then(response =>
+      response.arrayBuffer()
+    ).then(bytes =>
+      instantiate(bytes, importObject)
+    ).then(results => {
+      // results.exports._exported_func();
+      // console.log(results.exports._fib(9));
+      Module.print(results.exports._fib(9));
+    });
+
+    // ----------------------------------
+    // usual example
+
+    fetch('fib-module.wasm').then(response =>
+      response.arrayBuffer()
+    ).then(bytes =>
+      WebAssembly.instantiate(bytes, importObject)
+    ).then(results => {
+      // results.instance.exports._exported_func();
+      // console.log(results.instance.exports._fib(9));
+      Module.print('usual, ' + results.instance.exports._fib(9));
+    });
+
+    // ----------------------------------
+    // a better option:
+
+    async function createWebAssembly(path, importObject) {
+      const bytes = await window.fetch(path).then(x => x.arrayBuffer());
+      return WebAssembly.instantiate(bytes, importObject);
+    }
+    createWebAssembly('fib-module.wasm', importObject).then(wa => {
+      const exports = wa.instance.exports;
+      // console.log(exports._fib(9));
+      Module.print('async/await, ' + exports._fib(9));
+      // assign it to a Module polyfill
+      Object.assign(window.Module.exports, exports);
+    }).catch(err => console.warn('err loading wasm', err));
+
+    // ----------------------------------
+
+    const elTxt = document.getElementById("txtValue");
+
+    const jsFib = x => x < 2 ? 1 : jsFib(x - 1) + jsFib(x - 2);
+
+    const timeTaken = callback => {
+      console.time('timeTaken');
+      const r = callback();
+      console.timeEnd('timeTaken');
+      return r;
+    };
+
+    // call C from JS
+    function passValue() {
+      const intVal = parseInt(elTxt.value, 10);
+      const result = Module.ccall('fib', // name of C function
+        'number', //return type
+        ['number'], //argument types
+        [intVal] // arguments
+      );
+      Module.print('user, ' + result);
+    }
+
+    function testPerf() {
+      const intVal = parseInt(elTxt.value, 10);
+      console.log('-');
+
+      timeTaken(() => jsFib(intVal));
+      timeTaken(() => jsFib(intVal)); // ignited?
+
+      timeTaken(() => Module.ccall('fib', // name of C function
+        'number', //return type
+        ['number'], //argument types
+        [intVal] // arguments
+      ));
+    }
+  </script>
+</body>
+
+</html>

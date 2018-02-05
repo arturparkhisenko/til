@@ -1,0 +1,14 @@
+{
+  "name": "fib-module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fib-module.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "emrun --browser 'chrome' index.html",
+    "start-with-python": "python -m SimpleHTTPServer",
+    "build": "emcc fib-module.c -s WASM=1 -s SIDE_MODULE=1 -Os -o fib-module.wasm"
+  },
+  "author": "Artur Parkhisenko",
+  "license": "ISC"
+}

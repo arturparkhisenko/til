@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Emscripten-Generated Code</title>
+  </head>
+  <body>
+
+    <div id="status" style="border:1px solid #000; min-height: 3px; min-width: 30px;">Downloading...</div>
+    <br>
+    <canvas id="canvas" style="background-color:#000"></canvas>
+    <br>
+    <textarea id="output" rows="8" cols="50"></textarea>
+    <br>
+    <h5>JS2WASM</h5>
+    <input type="text" id="txtValue" />
+    <button onclick="PassValue();">Pass Value</button>
+    <br>
+    <h5>JS2WASM using pointers</h5>
+    <button onclick="PassValueUseMacro();">Pass Value Use Macro</button>
+    <button onclick="TestPointer();">Test Pointer</button>
+
+    <script type="text/javascript">
+      var statusElement = document.getElementById('status');
+
+      var Module = {
+        preRun: [],
+        postRun: [],
+        print: (function() {
+          var element = document.getElementById('output');
+          if (element) element.value = ''; // clear browser cache
+          return function(text) {
+            if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+            console.log(text);
+            if (element) {
+              element.value += text + "\n";
+              element.scrollTop = element.scrollHeight; // focus on bottom
+            }
+          };
+        })(),
+        printErr: function(text) {
+          if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+          if (0) { // XXX disabled for safety typeof dump == 'function') {
+            dump(text + '\n'); // fast, straight to the real console
+          } else {
+            console.error(text);
+          }
+        },
+        canvas: (function() {
+          var canvas = document.getElementById('canvas');
+
+          // As a default initial behavior, pop up an alert when webgl context is lost. To make your
+          // application robust, you may want to override this behavior before shipping!
+          // See http://www.khronos.org/registry/webgl/specs/latest/1.0/#5.15.2
+          canvas.addEventListener("webglcontextlost", function(e) { alert('WebGL context lost. You will need to reload the page.'); e.preventDefault(); }, false);
+
+          return canvas;
+        })(),
+        setStatus: function(text) {
+          if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: '' };
+          if (text === Module.setStatus.text) return;
+          var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
+          var now = Date.now();
+          if (m && now - Date.now() < 30) return; // if this is a progress update, skip it if too soon
+          statusElement.innerHTML = text;
+        },
+        totalDependencies: 0,
+        monitorRunDependencies: function(left) {
+          this.totalDependencies = Math.max(this.totalDependencies, left);
+          Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+        }
+      };
+      Module.setStatus('Downloading...');
+      window.onerror = function() {
+        Module.setStatus('Exception thrown, see JavaScript console');
+        Module.setStatus = function(text) {
+          if (text) Module.printErr('[post-exception status] ' + text);
+        };
+      };
+    </script>
+
+    <script async type="text/javascript" src="intro.js"></script>
+
+    <script>
+      var elTxt = document.getElementById("txtValue");
+
+      // call C from JS
+      function PassValue() {
+        Module.ccall('TestFunction', // name of C function
+          null, //return type
+          ['number'], //argument types
+          [parseInt(elTxt.value, 10)]
+        );
+      }
+
+      // call C from JS
+      function PassValueUseMacro() {
+        Module.ccall('TestFunctionWithMacro', // name of C function
+          null, //return type
+          ['number'], //argument types
+          [parseInt(elTxt.value, 10)]
+        );
+      }
+
+      // call JS from C
+      function TestPointer() {
+        // Create an anonymous function that will be called by the C code
+        var pointer = Runtime.addFunction(function() {
+          // alert('I was called from C by pointer!');
+          Module.print('I was called from C by pointer!');
+        });
+
+        // Call the C code passing in the pointer reference
+        Module.ccall('CallFunctionPointer', null, ['number'], [pointer]);
+
+        // Remove the function pointer from the array
+        Runtime.removeFunction(pointer);
+      }
+    </script>
+  </body>
+</html>
