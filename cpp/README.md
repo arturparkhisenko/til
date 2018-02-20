@@ -33,6 +33,7 @@
 4. [cprogramming](http://www.cprogramming.com/tutorial.html)
 5. [cppstudio](http://cppstudio.com/)
 6. [isocpp](https://isocpp.org/)
+6. [CppCoreGuidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)
 
 ## Xcode
 

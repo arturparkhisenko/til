@@ -39,6 +39,32 @@ int main() {
   Arr arr2;
   arr2.setArr();
   arr2.printArr();
+
+  // ------------------------------------
+  int x[5];
+  // &x == x // compile error, diff types:
+  //   int (*TYPE)[5] and int *TYPE
+  // but below all truthy:
+  // (void *)&x == (void *)x
+  // (void *)&x == (void *)&(x[0])
+  // x == x + 0
+  // x == &(x[0])
+  //
+  // Operation []
+  // x[2] == *(x + 2) // x will be a first element pointer
+  // (int *)((char *)x + 2 * sizeof (int)) // moved pointer
+  //
+  // What is &x + 1 ? we was pointed over all array
+  // same as:
+  // *(&x + 1) == x + 5
+  // *((&x)[1]) == x[5]
+  // (&x)[1] == x + 5
+  // (&x)[1][0] == x[5]
+  //
+  // About ** and multidimensional arrays
+  // int **x = new int *[3];
+  // x[0][0] + 3 == **x + 3 but !== *(int *)x + 3
+
   return 0;
 }
 
@@ -132,3 +158,6 @@ void Arr::printArr() {
     cout << "To use this method you need specify array and it's length first"
          << endl;
 }
+
+// count array size
+template <typename t, size_t n> size_t len(t (&a)[n]) { return n; }

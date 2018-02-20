@@ -1,13 +1,14 @@
 {
-  "name": "fib-module",
+  "name": "sum",
   "version": "1.0.0",
   "description": "",
-  "main": "fib-module.js",
+  "main": "sum.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "emrun --browser 'chrome' index.html",
+    "start-simple": "emrun --browser 'chrome' index.html",
     "start-with-python": "python -m SimpleHTTPServer",
-    "build": "emcc fib-module.c -s WASM=1 -s SIDE_MODULE=1 -Oz -g4 -o fib-module.wasm"
+    "build": "emcc -s WASM=1 -s SIDE_MODULE=1 -Oz -g4 -o sum.wasm sum.c"
   },
   "author": "Artur Parkhisenko",
   "license": "ISC"

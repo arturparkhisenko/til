@@ -78,16 +78,6 @@ function instantiateCachedURL(dbVersion, url, importObject) {
     };
   }
 
-  // This helper function fetches 'url', compiles it into a Module,
-  // instantiates the Module with the given import object.
-  function fetchAndInstantiate() {
-    return fetch(url).then(response =>
-      response.arrayBuffer()
-    ).then(buffer =>
-      WebAssembly.instantiate(buffer, importObject)
-    )
-  }
-
   // With all the Promise helper functions defined, we can now express the core
   // logic of an IndexedDB cache lookup. We start by trying to open a database.
   return openDatabase().then(db => {
