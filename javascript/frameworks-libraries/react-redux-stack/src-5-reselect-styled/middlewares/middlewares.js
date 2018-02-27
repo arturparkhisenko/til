@@ -1,9 +1,10 @@
-import {addUser} from './actions';
+import {addUser} from './../actions/actions';
 
-const loggerMiddleware = (store) => {
+// const loggerMiddleware = (store) => {
+const loggerMiddleware = () => {
   return function(next) {
     return function(action) {
-      console.debug('trigger', action);
+      console.debug('trigger action:', action);
       return next(action);
       // const result = next(action);
       // console.debug('store after action', store.getState());

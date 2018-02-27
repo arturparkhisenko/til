@@ -2,7 +2,7 @@ export const addUser = () => {
   return dispatch => {
     const name = '@' + Date.now();
     dispatch({type: 'ADD_USER', newUser: name});
-    dispatch(addMessage('Joined to a channel', name, Date.now()));
+    dispatch(addMessage('Joined!', name, Date.now()));
   };
 };
 

@@ -3,13 +3,13 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import reduxThunk from 'redux-thunk';
 // Reducers -----------------------------
-import reducer from './reducers';
+import reducer from './reducers/reducers';
 // Components ---------------------------
-import Chat from './Chat';
+import Chat from './containers/Chat';
+// import Button from './components/Button';
+// import ButtonFunctional from './components/ButtonFunctional';
 // Middleware ---------------------------
-import {loggerMiddleware, checkUserMiddleware} from './middlewares';
-// Styles -------------------------------
-import './App.css';
+import {loggerMiddleware, checkUserMiddleware} from './middlewares/middlewares';
 // --------------------------------------
 
 // custom example thunk
@@ -32,9 +32,9 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <Chat/>
-        </div>
+        <Chat/>
+        {/* <Button text="Usual Button" /> */}
+        {/* <ButtonFunctional  text="ButtonFunctional" /> */}
       </Provider>
     );
   }
