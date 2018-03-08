@@ -8,7 +8,7 @@ int factorial(int n) {
     return n * factorial(n - 1);
   }
 }
-int main() {
+int main(int argc, const char * argv[]) {
   cout << factorial(5);
   return 0;
 }
