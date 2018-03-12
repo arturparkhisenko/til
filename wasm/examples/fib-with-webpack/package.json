@@ -16,6 +16,6 @@
   "devDependencies": {
     "wasm-loader": "^1.3.0",
     "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.10"
+    "webpack-cli": "^2.0.11"
   }
 }

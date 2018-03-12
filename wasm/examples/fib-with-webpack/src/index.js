@@ -12,7 +12,7 @@ import("./fib-sync").then(module => {
 });
 
 // WebAssembly module (direct)
-import("./fib.wasm").then(wasm => {
-	const result = wasm.fib(13);
+import("./fib.wasm").then(({fib}) => { // wasm.fib
+	const result = fib(13);
   console.log('fib.wasm', result);
 });

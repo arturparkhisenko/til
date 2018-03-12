@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "emrun --browser 'chrome' index.html",
-    "build": "emcc fib.c -s WASM=1 -s SIDE_MODULE=1 -Oz -g4 -o fib.wasm",
-    "build-parcel": "parcel index.html",
+    "start": "emrun --browser 'chrome' ./dist/index.html",
+    "build": "parcel index.html",
+    "build-wasm": "emcc fib.c -s WASM=1 -s SIDE_MODULE=1 -Oz -g4 -o fib.wasm",
     "build-wast2wasm": "./../../../../wabt/bin/wat2wasm fib.wast -o fib.wasm"
   },
   "author": "",

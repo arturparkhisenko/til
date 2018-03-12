@@ -8,7 +8,9 @@
     "start": "emrun --browser 'chrome' index.html",
     "start-simple": "emrun --browser 'chrome' index.html",
     "start-with-python": "python -m SimpleHTTPServer",
-    "build": "emcc -s WASM=1 -s SIDE_MODULE=1 -Oz -g4 -o sum.wasm sum.c"
+    "build": "emcc -s WASM=1 -s SIDE_MODULE=1 -Oz -g4 -o sum.wasm sum.c",
+    "build-js": "emcc -s WASM=1 -Oz -g4 -o sum.js sum.c",
+    "build-html": "emcc -s WASM=1 -Oz -g4 -o sum.html sum.c"
   },
   "author": "Artur Parkhisenko",
   "license": "ISC"
