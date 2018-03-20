@@ -19,7 +19,9 @@
 ## Linters
 
 - [cppcheck](http://cppcheck.sourceforge.net)
+- [clang-check, clang-format](https://clang.llvm.org/docs/ClangTools.html)
 - [clang-tidy](http://clang.llvm.org/extra/clang-tidy/)
+- [Pre-Built Binaries](http://releases.llvm.org/download.html)
 
 ## Install
 

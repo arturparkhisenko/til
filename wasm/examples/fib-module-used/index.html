@@ -133,7 +133,7 @@
     ).then(results => {
       // results.exports._exported_func();
       // console.log(results.exports._fib(9));
-      Module.print(results.exports._fib(9));
+      Module.print(results.exports._fib(9) + ', using: .compile + .Instance');
     });
 
     // ----------------------------------
@@ -146,7 +146,7 @@
     ).then(results => {
       // results.instance.exports._exported_func();
       // console.log(results.instance.exports._fib(9));
-      Module.print('usual, ' + results.instance.exports._fib(9));
+      Module.print(results.instance.exports._fib(9) + ', using: .instantiate');
     });
 
     // ----------------------------------
@@ -159,7 +159,7 @@
     createWebAssembly('fib-module.wasm', importObject).then(wa => {
       const exports = wa.instance.exports;
       // console.log(exports._fib(9));
-      Module.print('async/await, ' + exports._fib(9));
+      Module.print(exports._fib(9) + ', as: async/await');
       // assign it to a Module polyfill
       Object.assign(window.Module.exports, exports);
     }).catch(err => console.warn('err loading wasm', err));
@@ -191,10 +191,10 @@
     function testPerf() {
       const intVal = parseInt(elTxt.value, 10);
       console.log('-');
-
+      console.log('JavaScript, 2 calls (ignited):');
       timeTaken(() => jsFib(intVal));
       timeTaken(() => jsFib(intVal)); // ignited?
-
+      console.log('WASM:');
       timeTaken(() => Module.ccall('fib', // name of C function
         'number', //return type
         ['number'], //argument types
