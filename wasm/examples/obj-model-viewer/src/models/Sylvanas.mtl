@@ -1,0 +1,36 @@
+#
+# mtl file for Sylvanas.obj obj file
+#
+
+newmtl creature_ladysylvanaswindrunner_ladysylvanaswindrunner.m2_Geoset_000
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd Sylvanas_ladysylvanaswindrunner_01.png
+newmtl creature_ladysylvanaswindrunner_ladysylvanaswindrunner.m2_Geoset_001
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd Sylvanas_ladysylvanaswindrunner_02.png
+newmtl creature_ladysylvanaswindrunner_ladysylvanaswindrunner.m2_Geoset_002
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd Sylvanas_ladysylvanaswindrunner_02.png
+newmtl creature_ladysylvanaswindrunner_ladysylvanaswindrunner.m2_Geoset_003
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd Sylvanas_ladysylvanaswindrunner_01.png
