@@ -12,18 +12,18 @@
   },
   "dependencies": {
     "normalize.css": "^8.0.0",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "react-redux": "^5.0.7",
-    "redux": "^4.0.0",
-    "redux-thunk": "^2.2.0",
-    "reselect": "^3.0.1",
-    "styled-components": "^3.2.6",
-    "why-did-you-update": "^0.1.1"
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "react-redux": "^5.1.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "styled-components": "^4.0.3",
+    "why-did-you-update": "^1.0.3"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-plugin-react": "^7.7.0",
-    "react-scripts": "^1.1.4"
+    "eslint": "^5.8.0",
+    "eslint-plugin-react": "^7.11.1",
+    "react-scripts": "^2.1.1"
   }
 }
