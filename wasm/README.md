@@ -1,15 +1,29 @@
 # [webassembly](http://webassembly.org/)
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Requirements](#requirements)
+- [Commands](#commands)
+- [Some docs](#some-docs)
+  - [Options emscripten](#options-emscripten)
+- [Tools](#tools)
+- [Url's](#urls)
+  - [Articles](#articles)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Requirements
 
 - [CMake](https://cmake.org/)
 - [Python](https://www.python.org/) 2.7+
-- Linux-[GCC](https://gcc.gnu.org/), MACOS-[Xcode](https://developer.apple.com/xcode/), Windows-[VisualStudio](https://www.visualstudio.com/) 2015+
-- [install toolchain](http://webassembly.org/getting-started/developers-guide/#downloading-or-compiling-the-toolchain)
+- One of: [GCC for Linux](https://gcc.gnu.org/), [Xcode for MacOS](https://developer.apple.com/xcode/), [VisualStudio 2015+ for Windows](https://www.visualstudio.com/)
+- [Toolchain](http://webassembly.org/getting-started/developers-guide/#downloading-or-compiling-the-toolchain)
 
 ## Commands
 
-- To compile C/C++: 
+- To compile C/C++
   - `emcc hw.c -s WASM=1 -s SIDE_MODULE=1 -o hw.wasm`
   - `emcc hw.cpp -s WASM=1 -o hw.html`
   - `em++ hw.cpp -s WASM=1 --bind --std=c++11 -o hw.js`
@@ -25,6 +39,7 @@
 - [Interacting-with-code](https://kripken.github.io/emscripten-site/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html)
 
 ### Options [emscripten](https://kripken.github.io/emscripten-site/docs/tools_reference/emcc.html)
+
 > all options here [settings](https://github.com/kripken/emscripten/blob/master/src/settings.js)
 
 - `-Os` optimizations (O0, O1, O2, O3, Os, Oz)
@@ -42,7 +57,7 @@
 
 - [binaryen](https://github.com/WebAssembly/binaryen) asm2wasm, s2wasm, wasm2asm, mir2wasm
 - [wabt](https://github.com/WebAssembly/wabt) wat2wasm, wasm2wat, wasm-objdump, wasm-interp, wat-desugar, wasm-link
-- [emscripten](https://kripken.github.io/emscripten-site/) 
+- [emscripten](https://kripken.github.io/emscripten-site/)
 - [WasmExplorer](https://mbebenita.github.io/WasmExplorer/)
 - [WasmCodeExplorer](https://wasdk.github.io/wasmcodeexplorer/)
 - [WasmFiddle](https://wasdk.github.io/WasmFiddle/)
