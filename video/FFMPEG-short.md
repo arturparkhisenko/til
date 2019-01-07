@@ -35,10 +35,10 @@ It contains libavcodec, libavutil, libavformat, libavfilter, libavdevice, libsws
 - `ffplay` A simple media player based on SDL and the FFmpeg libraries.
 - `ffprobe` A simple multimedia stream analyzer.
 
-#### Shared options
+#### ffmpeg options
 
 - `ffmpeg -i input output` input option
-- `ffmpeg -f` filter, full option `-filter`
+- `ffmpeg -f` fmt (input/output), force input or output file format
 
 ### [Devices](https://www.ffmpeg.org/ffmpeg-devices.html)
 
@@ -75,7 +75,7 @@ It contains libavcodec, libavutil, libavformat, libavfilter, libavdevice, libsws
 
 As pipeline: `VideoSource` -> `Device` -> `Tool` -> Output.
 
-- `ffmpeg -filter lavfi -i testsrc=duration=10.123:size=1280x720:rate=24 testsrc.mpg` output to a file
+- `ffmpeg -f lavfi -i testsrc=duration=10.123:size=1280x720:rate=24 testsrc.mpg` output to a file
 - `ffplay -f lavfi -i testsrc=duration=10.123:size=1280x720:rate=24` just play it
 - `ffplay -f lavfi -i smptebars=duration=10:size=hd480:rate=film` options names used
 - `ffplay -f lavfi color=c=blueviolet` just plain color
