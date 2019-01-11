@@ -6,6 +6,7 @@
 - [1. A Digital Media Primer For Geeks ("Monty" Montgomery @ xiph.org)](https://youtu.be/FG9jemV1T7I)
 - [2. D/A and A/D | Digital Show and Tell ("Monty" Montgomery @ xiph.org)](https://youtu.be/cIQ9IXSUzuM)
 - [The Moving Picture Experts Group](https://mpeg.chiariglione.org/)
+- [DASH Behind the Scenes](https://mpeg.chiariglione.org/news/dash-behind-scenes)
 
 ## Technologies
 
