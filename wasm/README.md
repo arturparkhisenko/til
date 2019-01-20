@@ -46,7 +46,7 @@
 - `-Os` optimizations (O0, O1, O2, O3, Os, Oz)
 - `-g` generate wast, wasm, wasm.map
 - `-s WASM=1` with JS polyfill
-- `-s "BINARYEN_METHOD='native-wasm'"` without polyfill
+- `-s "BINARYEN_METHOD='native-wasm'"` without polyfill (default)
   - methods: `['native-wasm', 'interpret-s-expr', 'interpret-binary', 'interpret-asm2wasm', 'asmjs']`
 - `-o <target>` one of `<name> + '.js' || '.html' || '.bc'(default) || '.o'`
 - `-s MAIN_MODULE=1` system libraries linked in or `-s SIDE_MODULE=1` without

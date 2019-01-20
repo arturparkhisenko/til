@@ -1,15 +1,14 @@
 (module
- (import "env" "memoryBase" (global $memoryBase i32))
+ (import "env" "__memory_base" (global $__memory_base i32))
  (global $STACKTOP (mut i32) (i32.const 0))
  (global $STACK_MAX (mut i32) (i32.const 0))
  (export "__post_instantiate" (func $__post_instantiate))
  (export "_fib" (func $_fib))
- (export "runPostSets" (func $runPostSets))
- (func $_fib (; 0 ;) (param $0 i32) (result i32)
+ (func $_fib (; 0 ;) (; has Stack IR ;) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
-  (set_local $2
+  (local.set $1
    (i32.const 1)
   )
   (loop $while-in
@@ -17,56 +16,52 @@
     ;;@ fib-module.c:5:0
     (br_if $while-out
      (i32.lt_s
-      (get_local $0)
+      (local.get $0)
       (i32.const 2)
      )
     )
     ;;@ fib-module.c:7:0
-    (set_local $1
+    (local.set $2
      (i32.add
-      (get_local $0)
+      (local.get $0)
       (i32.const -2)
      )
     )
-    (set_local $0
+    (local.set $0
      (i32.add
-      (get_local $0)
+      (local.get $0)
       (i32.const -1)
      )
     )
-    (set_local $3
+    (local.set $3
      (call $_fib
-      (get_local $0)
+      (local.get $0)
      )
     )
-    (set_local $0
-     (get_local $1)
+    (local.set $0
+     (local.get $2)
     )
-    (set_local $2
+    (local.set $1
      (i32.add
-      (get_local $3)
-      (get_local $2)
+      (local.get $1)
+      (local.get $3)
      )
     )
     (br $while-in)
    )
   )
   ;;@ fib-module.c:5:0
-  (get_local $2)
+  (local.get $1)
  )
- (func $runPostSets (; 1 ;)
-  (nop)
- )
- (func $__post_instantiate (; 2 ;)
-  (set_global $STACKTOP
-   (get_global $memoryBase)
+ (func $__post_instantiate (; 1 ;) (; has Stack IR ;)
+  (global.set $STACKTOP
+   (global.get $__memory_base)
   )
-  (set_global $STACK_MAX
+  (global.set $STACK_MAX
    (i32.add
-    (get_global $STACKTOP)
+    (global.get $STACKTOP)
     (i32.const 5242880)
    )
   )
-  (call $runPostSets)
  )
 )

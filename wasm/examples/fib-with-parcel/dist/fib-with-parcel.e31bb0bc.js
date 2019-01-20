@@ -7,9 +7,10 @@
 // orig method which is the require for previous bundles
 
 // eslint-disable-next-line no-global-assign
-require = (function (modules, cache, entry) {
+parcelRequire = (function (modules, cache, entry, globalName) {
   // Save the require from previous bundle to this closure if any
-  var previousRequire = typeof require === "function" && require;
+  var previousRequire = typeof parcelRequire === 'function' && parcelRequire;
+  var nodeRequire = typeof require === 'function' && require;
 
   function newRequire(name, jumped) {
     if (!cache[name]) {
@@ -17,7 +18,7 @@ require = (function (modules, cache, entry) {
         // if we cannot find the module within our internal map or
         // cache jump to the current global require ie. the last bundle
         // that was added to the page.
-        var currentRequire = typeof require === "function" && require;
+        var currentRequire = typeof parcelRequire === 'function' && parcelRequire;
         if (!jumped && currentRequire) {
           return currentRequire(name, true);
         }
@@ -30,16 +31,22 @@ require = (function (modules, cache, entry) {
           return previousRequire(name, true);
         }
 
+        // Try the node require function if it exists.
+        if (nodeRequire && typeof name === 'string') {
+          return nodeRequire(name);
+        }
+
         var err = new Error('Cannot find module \'' + name + '\'');
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
 
       localRequire.resolve = resolve;
+      localRequire.cache = {};
 
       var module = cache[name] = new newRequire.Module(name);
 
-      modules[name][0].call(module.exports, localRequire, module, module.exports);
+      modules[name][0].call(module.exports, localRequire, module, module.exports, this);
     }
 
     return cache[name].exports;
@@ -64,31 +71,53 @@ require = (function (modules, cache, entry) {
   newRequire.modules = modules;
   newRequire.cache = cache;
   newRequire.parent = previousRequire;
+  newRequire.register = function (id, exports) {
+    modules[id] = [function (require, module) {
+      module.exports = exports;
+    }, {}];
+  };
 
   for (var i = 0; i < entry.length; i++) {
     newRequire(entry[i]);
   }
 
+  if (entry.length) {
+    // Expose entry point to Node, AMD or browser globals
+    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
+    var mainExports = newRequire(entry[entry.length - 1]);
+
+    // CommonJS
+    if (typeof exports === "object" && typeof module !== "undefined") {
+      module.exports = mainExports;
+
+    // RequireJS
+    } else if (typeof define === "function" && define.amd) {
+     define(function () {
+       return mainExports;
+     });
+
+    // <script>
+    } else if (globalName) {
+      this[globalName] = mainExports;
+    }
+  }
+
   // Override the current require with this new one
   return newRequire;
-})({2:[function(require,module,exports) {
-'use strict';
+})({"index.js":[function(require,module,exports) {
+"use strict";
 
-var _fib = require('./fib.wasm');
+var _fib = require("./fib.wasm");
 
-var _fib2 = require('./fib.rs');
+var _fib2 = require("./fib.rs");
 
 // wasm should be generated from the cleaned wast
 // To get started you need Cargo's bin directory ($HOME/.cargo/bin) in your PATH
 // environment variable.
 // To configure your current shell run source $HOME/.cargo/env
-
 // sync import
-
 console.log((0, _fib.fib)(9));
-console.log((0, _fib2.fib)(9));
-
-// dynamic
+console.log((0, _fib2.fib)(9)); // dynamic
 //
 // index.js:
 // module.exports = import('./dynamic').then(function (add) {
@@ -97,7 +126,6 @@ console.log((0, _fib2.fib)(9));
 // dynamic.js
 // var {add} = require('./add.wasm');
 // module.exports = add;
-
 // async
 //
 // WebAssembly module (indirect)
@@ -105,59 +133,62 @@ console.log((0, _fib2.fib)(9));
 // 	 const result = module.default(13);
 //   console.log('fib-async .js', result);
 // });
-
 // WebAssembly module (direct)
-// import('./fib.wasm').then(wasm => {
-// import('./fib.wasm').then(({fib}) => {
+// import('./fib.wasm').then(({fib}) => { // wasm.fib
 //   const result = fib(13);
-//   const result = wasm.fib(13);
 //   console.log('fib-async .wasm', result);
 // });
-
 // import('./fib.rs').then(({fib}) => {
 // 	const result = fib(13);
 //   console.log('fib-async .rs', result);
 // });
-},{"./fib.wasm":4,"./fib.rs":5}],6:[function(require,module,exports) {
-
-var global = (1, eval)('this');
+},{"./fib.wasm":"fib.wasm","./fib.rs":"fib.rs"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var global = arguments[3];
+var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
+
 function Module(moduleName) {
   OldModule.call(this, moduleName);
   this.hot = {
+    data: module.bundle.hotData,
+    _acceptCallbacks: [],
+    _disposeCallbacks: [],
     accept: function (fn) {
-      this._acceptCallback = fn || function () {};
+      this._acceptCallbacks.push(fn || function () {});
     },
     dispose: function (fn) {
-      this._disposeCallback = fn;
+      this._disposeCallbacks.push(fn);
     }
   };
+  module.bundle.hotData = null;
 }
 
 module.bundle.Module = Module;
-
 var parent = module.bundle.parent;
+
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
-  var hostname = '' || location.hostname;
+  var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54913' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61961" + '/');
+
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
     if (data.type === 'update') {
+      console.clear();
       data.assets.forEach(function (asset) {
-        hmrApply(global.require, asset);
+        hmrApply(global.parcelRequire, asset);
       });
-
       data.assets.forEach(function (asset) {
         if (!asset.isNew) {
-          hmrAccept(global.require, asset.id);
+          hmrAccept(global.parcelRequire, asset.id);
         }
       });
     }
 
     if (data.type === 'reload') {
       ws.close();
+
       ws.onclose = function () {
         location.reload();
       };
@@ -165,16 +196,41 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
 
     if (data.type === 'error-resolved') {
       console.log('[parcel] ✨ Error resolved');
+      removeErrorOverlay();
     }
 
     if (data.type === 'error') {
-      console.error('[parcel] 🚨  ' + data.error.message + '\n' + 'data.error.stack');
+      console.error('[parcel] 🚨  ' + data.error.message + '\n' + data.error.stack);
+      removeErrorOverlay();
+      var overlay = createErrorOverlay(data);
+      document.body.appendChild(overlay);
     }
   };
 }
 
+function removeErrorOverlay() {
+  var overlay = document.getElementById(OVERLAY_ID);
+
+  if (overlay) {
+    overlay.remove();
+  }
+}
+
+function createErrorOverlay(data) {
+  var overlay = document.createElement('div');
+  overlay.id = OVERLAY_ID; // html encode message and stack trace
+
+  var message = document.createElement('div');
+  var stackTrace = document.createElement('pre');
+  message.innerText = data.error.message;
+  stackTrace.innerText = data.error.stack;
+  overlay.innerHTML = '<div style="background: black; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; opacity: 0.85; font-family: Menlo, Consolas, monospace; z-index: 9999;">' + '<span style="background: red; padding: 2px 4px; border-radius: 2px;">ERROR</span>' + '<span style="top: 2px; margin-left: 5px; position: relative;">🚨</span>' + '<div style="font-size: 18px; font-weight: bold; margin-top: 20px;">' + message.innerHTML + '</div>' + '<pre>' + stackTrace.innerHTML + '</pre>' + '</div>';
+  return overlay;
+}
+
 function getParents(bundle, id) {
   var modules = bundle.modules;
+
   if (!modules) {
     return [];
   }
@@ -185,8 +241,9 @@ function getParents(bundle, id) {
   for (k in modules) {
     for (d in modules[k][1]) {
       dep = modules[k][1][d];
+
       if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) {
-        parents.push(+k);
+        parents.push(k);
       }
     }
   }
@@ -200,6 +257,7 @@ function getParents(bundle, id) {
 
 function hmrApply(bundle, asset) {
   var modules = bundle.modules;
+
   if (!modules) {
     return;
   }
@@ -215,6 +273,7 @@ function hmrApply(bundle, asset) {
 
 function hmrAccept(bundle, id) {
   var modules = bundle.modules;
+
   if (!modules) {
     return;
   }
@@ -224,25 +283,37 @@ function hmrAccept(bundle, id) {
   }
 
   var cached = bundle.cache[id];
-  if (cached && cached.hot._disposeCallback) {
-    cached.hot._disposeCallback();
+  bundle.hotData = {};
+
+  if (cached) {
+    cached.hot.data = bundle.hotData;
+  }
+
+  if (cached && cached.hot && cached.hot._disposeCallbacks.length) {
+    cached.hot._disposeCallbacks.forEach(function (cb) {
+      cb(bundle.hotData);
+    });
   }
 
   delete bundle.cache[id];
   bundle(id);
-
   cached = bundle.cache[id];
-  if (cached && cached.hot && cached.hot._acceptCallback) {
-    cached.hot._acceptCallback();
+
+  if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
+    cached.hot._acceptCallbacks.forEach(function (cb) {
+      cb();
+    });
+
     return true;
   }
 
-  return getParents(global.require, id).some(function (id) {
-    return hmrAccept(global.require, id);
+  return getParents(global.parcelRequire, id).some(function (id) {
+    return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}],10:[function(require,module,exports) {
+},{}],"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
+
 function getBundleURLCached() {
   if (!bundleURL) {
     bundleURL = getBundleURL();
@@ -257,6 +328,7 @@ function getBundleURL() {
     throw new Error();
   } catch (err) {
     var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+
     if (matches) {
       return getBaseURL(matches[0]);
     }
@@ -271,7 +343,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],8:[function(require,module,exports) {
+},{}],"node_modules/parcel-bundler/src/builtins/bundle-loader.js":[function(require,module,exports) {
 var getBundleURL = require('./bundle-url').getBundleURL;
 
 function loadBundlesLazy(bundles) {
@@ -286,7 +358,9 @@ function loadBundlesLazy(bundles) {
   } catch (err) {
     if (err.code === 'MODULE_NOT_FOUND') {
       return new LazyPromise(function (resolve, reject) {
-        loadBundles(bundles).then(resolve, reject);
+        loadBundles(bundles.slice(0, -1)).then(function () {
+          return require(id);
+        }).then(resolve, reject);
       });
     }
 
@@ -295,14 +369,11 @@ function loadBundlesLazy(bundles) {
 }
 
 function loadBundles(bundles) {
-  var id = bundles[bundles.length - 1];
-
-  return Promise.all(bundles.slice(0, -1).map(loadBundle)).then(function () {
-    return require(id);
-  });
+  return Promise.all(bundles.map(loadBundle));
 }
 
 var bundleLoaders = {};
+
 function registerBundleLoader(type, loader) {
   bundleLoaders[type] = loader;
 }
@@ -310,10 +381,11 @@ function registerBundleLoader(type, loader) {
 module.exports = exports = loadBundlesLazy;
 exports.load = loadBundles;
 exports.register = registerBundleLoader;
-
 var bundles = {};
+
 function loadBundle(bundle) {
   var id;
+
   if (Array.isArray(bundle)) {
     id = bundle[1];
     bundle = bundle[0];
@@ -325,15 +397,17 @@ function loadBundle(bundle) {
 
   var type = (bundle.substring(bundle.lastIndexOf('.') + 1, bundle.length) || bundle).toLowerCase();
   var bundleLoader = bundleLoaders[type];
+
   if (bundleLoader) {
     return bundles[bundle] = bundleLoader(getBundleURL() + bundle).then(function (resolved) {
       if (resolved) {
-        module.bundle.modules[id] = [function (require, module) {
-          module.exports = resolved;
-        }, {}];
+        module.bundle.register(id, resolved);
       }
 
       return resolved;
+    }).catch(function (e) {
+      delete bundles[bundle];
+      throw e;
     });
   }
 }
@@ -344,13 +418,15 @@ function LazyPromise(executor) {
 }
 
 LazyPromise.prototype.then = function (onSuccess, onError) {
-  return this.promise || (this.promise = new Promise(this.executor).then(onSuccess, onError));
+  if (this.promise === null) this.promise = new Promise(this.executor);
+  return this.promise.then(onSuccess, onError);
 };
 
 LazyPromise.prototype.catch = function (onError) {
-  return this.promise || (this.promise = new Promise(this.executor).catch(onError));
+  if (this.promise === null) this.promise = new Promise(this.executor);
+  return this.promise.catch(onError);
 };
-},{"./bundle-url":10}],12:[function(require,module,exports) {
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"node_modules/parcel-bundler/src/builtins/loaders/browser/wasm-loader.js":[function(require,module,exports) {
 module.exports = function loadWASMBundle(bundle) {
   return fetch(bundle).then(function (res) {
     if (WebAssembly.instantiateStreaming) {
@@ -365,6 +441,6 @@ module.exports = function loadWASMBundle(bundle) {
   });
 };
 },{}],0:[function(require,module,exports) {
-var b=require(8);b.register("wasm",require(12));b.load([["b5193a5924d278e543530c6e83289df9.wasm",4],["00607f3f81146d83c8a0556cb804f52b.wasm",5],2]);
-},{}]},{},[6,0])
-//# sourceMappingURL=/dist/fib-with-parcel.map
+var b=require("node_modules/parcel-bundler/src/builtins/bundle-loader.js");b.register("wasm",require("node_modules/parcel-bundler/src/builtins/loaders/browser/wasm-loader.js"));b.load([["fib.f91d80f4.wasm","fib.wasm"],["fib.8c4cd53b.wasm","fib.rs"]]).then(function(){require("index.js");});
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js",0], null)
+//# sourceMappingURL=/fib-with-parcel.e31bb0bc.map

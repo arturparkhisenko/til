@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "emrun --browser 'chrome' index.html",
     "start-with-python": "python -m SimpleHTTPServer",
-    "build": "emcc fib-module.c -s WASM=1 -s SIDE_MODULE=1 -Oz -g4 -o fib-module.wasm"
+    "build": "emcc fib-module.c -s WASM=1 -s SIDE_MODULE=1 -s EXPORTED_FUNCTIONS='[\"_fib\"]' -Oz -g4 -o fib-module.wasm",
+    "build-html": "emcc fib-module.c -s WASM=1 -Oz -g2 -o fib-module.html"
   },
   "author": "Artur Parkhisenko",
   "license": "ISC"

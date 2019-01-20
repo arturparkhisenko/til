@@ -1,6 +1,8 @@
 # target: dependencies
 # [tab] system command
 
+# -s "BINARYEN_METHOD='native-wasm'" \
+
 all:
 	emcc \
 		-std=c99 \
@@ -9,6 +11,5 @@ all:
 		-s MODULARIZE=1 \
 		-s SIDE_MODULE=1 \
 		-s BINARYEN_ASYNC_COMPILATION=0 \
-		-s "BINARYEN_METHOD='native-wasm'" \
 		-o fib-module.wasm \
 		fib-module.c

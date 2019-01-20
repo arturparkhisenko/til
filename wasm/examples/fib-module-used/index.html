@@ -37,6 +37,11 @@
         if (element) element.value = ''; // clear browser cache
         return function(text) {
           if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+          // These replacements are necessary if you render to raw HTML
+          //text = text.replace(/&/g, "&amp;");
+          //text = text.replace(/</g, "&lt;");
+          //text = text.replace(/>/g, "&gt;");
+          //text = text.replace('\n', '<br>', 'g');
           console.log(text);
           if (element) {
             element.value += text + "\n";
@@ -46,38 +51,37 @@
       })(),
       printErr: function(text) {
         if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
-        if (0) { // XXX disabled for safety typeof dump == 'function') {
-          dump(text + '\n'); // fast, straight to the real console
-        } else {
-          console.error(text);
-        }
+        console.error(text);
       },
       setStatus: function(text) {
-        if (!Module.setStatus.last) Module.setStatus.last = {
-          time: Date.now(),
-          text: ''
-        };
-        if (text === Module.setStatus.text) return;
+        if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: '' };
+        if (text === Module.setStatus.last.text) return;
         var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
         var now = Date.now();
-        if (m && now - Date.now() < 30) return; // if this is a progress update, skip it if too soon
+        if (m && now - Module.setStatus.last.time < 30) return; // if this is a progress update, skip it if too soon
+        Module.setStatus.last.time = now;
+        Module.setStatus.last.text = text;
+        if (m) {
+          text = m[1];
+        }
         statusElement.innerHTML = text;
       },
       totalDependencies: 0,
       monitorRunDependencies: function(left) {
         this.totalDependencies = Math.max(this.totalDependencies, left);
-        Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies - left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+        Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
       }
     };
     Module.setStatus('Downloading...');
-    window.onerror = function() {
+    window.onerror = function(event) {
+      // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
       Module.setStatus('Exception thrown, see JavaScript console');
       Module.setStatus = function(text) {
         if (text) Module.printErr('[post-exception status] ' + text);
       };
     };
 
-    // polyfill api without emsdk
+    // custom polyfill api without emsdk
     Module.exports = {};
     Module.ccall = (name, // name of C function
       returnType = null, //return type
@@ -89,10 +93,10 @@
     Module.setStatus('Loaded!');
   </script>
 
-  <!-- not needed here, it's not a template -->
-  <!-- {{{ SCRIPT }}} -->
-
   <script>
+    // Custom script below
+    // inspired by Standalone WebAssembly Example https://gist.github.com/kripken/59c67556dc03bb6d57052fedef1e61ab
+
     // handmade env for the module
     const memory = new WebAssembly.Memory({
       initial: 256,
@@ -107,46 +111,45 @@
         maximum: 0,
         element: 'anyfunc'
       }),
-      tableBase: 0,
       memory: memory,
-      memoryBase: 1024,
+      __table_base: 0,
+      __memory_base: 1024,
       STACKTOP: 0,
       STACK_MAX: memory.buffer.byteLength,
+      abort: alert
     };
-    const importObject = {
-      env
-    };
+    const importObject = Object.freeze({env});
 
     // ----------------------------------
-    // This function is useful if it is necessary
-    // to a compile a module before it can be instantiated
-    // (otherwise, the WebAssembly.instantiate() function should be used).
-
-    function instantiate(bytes, imports) {
-      return WebAssembly.compile(bytes).then(m => new WebAssembly.Instance(m, imports));
-    }
+    // WebAssembly.compile
+    // Note: To generate fib-module with html example smaller than 11kb, use option -g2 instead of -g4
+    //   RangeError: WebAssembly.Instance is disallowed on the main thread, if the buffer size is larger than 4KB. Use WebAssembly.instantiate.
 
     fetch('fib-module.wasm').then(response =>
       response.arrayBuffer()
     ).then(bytes =>
-      instantiate(bytes, importObject)
+      WebAssembly.compile(bytes).then(m => new WebAssembly.Instance(m, importObject))
     ).then(results => {
-      // results.exports._exported_func();
-      // console.log(results.exports._fib(9));
       Module.print(results.exports._fib(9) + ', using: .compile + .Instance');
     });
 
     // ----------------------------------
-    // usual example
+    // WebAssembly.instantiate
 
     fetch('fib-module.wasm').then(response =>
       response.arrayBuffer()
     ).then(bytes =>
       WebAssembly.instantiate(bytes, importObject)
     ).then(results => {
-      // results.instance.exports._exported_func();
-      // console.log(results.instance.exports._fib(9));
       Module.print(results.instance.exports._fib(9) + ', using: .instantiate');
+    });
+
+    // ----------------------------------
+    // WebAssembly.instantiateStreaming preferrable
+    // check like: !Module['wasmBinary'] && typeof WebAssembly.instantiateStreaming === 'function' && !isDataURI(wasmBinaryFile)
+
+    WebAssembly.instantiateStreaming(fetch('fib-module.wasm'), importObject).then(({instance}) => {
+      Module.print(instance.exports._fib(9) + ', using: .instantiateStreaming');
     });
 
     // ----------------------------------
@@ -166,7 +169,7 @@
 
     // ----------------------------------
 
-    const elTxt = document.getElementById("txtValue");
+    const elTxt = document.getElementById('txtValue');
 
     const jsFib = x => x < 2 ? 1 : jsFib(x - 1) + jsFib(x - 2);
 
@@ -185,13 +188,13 @@
         ['number'], //argument types
         [intVal] // arguments
       );
-      Module.print('user, ' + result);
+      Module.print(`user, input: ${intVal}, result: ${result}`);
     }
 
     function testPerf() {
       const intVal = parseInt(elTxt.value, 10);
       console.log('-');
-      console.log('JavaScript, 2 calls (ignited):');
+      console.log('JavaScript, 2 calls (2d ignited/optimized):');
       timeTaken(() => jsFib(intVal));
       timeTaken(() => jsFib(intVal)); // ignited?
       console.log('WASM:');
