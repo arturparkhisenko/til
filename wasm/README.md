@@ -71,6 +71,7 @@
 - [wasmrocks](https://www.wasmrocks.com/)
 - [awesome-wasm](https://github.com/mbasso/awesome-wasm)
 - [cppwasm-book](https://3dgen.cn/cppwasm-book/en/), [source](https://github.com/3dgen/cppwasm-book)
+- [wasm-reference-manual](https://github.com/sunfishcode/wasm-reference-manual)
 
 ### Articles
 

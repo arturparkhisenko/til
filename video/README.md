@@ -7,6 +7,7 @@
 - [2. D/A and A/D | Digital Show and Tell ("Monty" Montgomery @ xiph.org)](https://youtu.be/cIQ9IXSUzuM)
 - [The Moving Picture Experts Group](https://mpeg.chiariglione.org/)
 - [DASH Behind the Scenes](https://mpeg.chiariglione.org/news/dash-behind-scenes)
+- [ffmpeg libav tutorial](https://github.com/leandromoreira/ffmpeg-libav-tutorial)
 
 ## Technologies
 
