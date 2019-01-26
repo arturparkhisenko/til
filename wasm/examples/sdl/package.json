@@ -1,0 +1,14 @@
+{
+  "name": "sdl",
+  "version": "1.0.0",
+  "description": "Simple DirectMedia Layer",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "emrun --browser 'chrome' index.html",
+    "start-with-python": "python -m SimpleHTTPServer",
+    "build": "emcc sdl.c -g4 -o index.html"
+  },
+  "author": "Artur Parkhisenko",
+  "license": "ISC"
+}

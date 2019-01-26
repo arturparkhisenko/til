@@ -8,7 +8,7 @@
     "start": "node index.js",
     "start_emrun": "emrun --browser 'chrome' intro.html",
     "start-with-python": "python -m SimpleHTTPServer",
-    "build": "emcc intro.c -s WASM=1 -o intro.html --shell-file shell_minimal_l.html -s NO_EXIT_RUNTIME=1 -s RESERVED_FUNCTION_POINTERS=1"
+    "build": "emcc intro.c -s WASM=1 -o intro.html --shell-file shell_minimal_l.html -s NO_EXIT_RUNTIME=1 -s EXTRA_EXPORTED_RUNTIME_METHODS='[\"ccall\"]' -s RESERVED_FUNCTION_POINTERS=1"
   },
   "author": "Artur Parkhisenko",
   "license": "ISC"

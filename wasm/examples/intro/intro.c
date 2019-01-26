@@ -3,6 +3,7 @@
 // #include "webassembly.h"
 #include <stdio.h>
 
+// docs https://kripken.github.io/emscripten-site/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html
 // MIME type -> 'application/wasm'
 // emcc intro.c -s WASM=1 -o intro.html --shell-file ./shell_minimal_l.html -s
 // NO_EXIT_RUNTIME=1 -s RESERVED_FUNCTION_POINTERS=1
@@ -15,7 +16,8 @@ int main() {
 }
 
 // call WASM from JS, -s NO_EXIT_RUNTIME=1
-void EMSCRIPTEN_KEEPALIVE TestFunction(int iVal) {
+EMSCRIPTEN_KEEPALIVE
+void TestFunction(int iVal) {
   printf("TestFunction called! Value passed in was: %i\n", iVal);
 }
 // call WASM from JS, END
