@@ -10,11 +10,11 @@
 
 <body>
   <script>
-    const importObject = {
+    const importObject = Object.freeze({
       env: {
-        memoryBase: 0,
-        tableBase: 0,
-        memory: new WebAssembly.Memory({ // ArrayBuffer
+        __memory_base: 0,
+        __table_base: 0,
+        memory: new WebAssembly.Memory({
           initial: 1, // 64KiB - single page
           maximum: 10 // 640KiB
         }),
@@ -23,8 +23,9 @@
           element: 'anyfunc'
         })
       }
-    };
+    });
 
+    // 1st option -----------------------
     const loadWASM = (url, importObject) =>
       fetch(url)
       .then(response => response.arrayBuffer())
@@ -34,52 +35,42 @@
       .then(results => results.instance);
 
     loadWASM('sum.wasm', importObject).then(instance => {
-      const {
-        exports
-      } = instance;
+      const {exports} = instance;
       const result = exports._sum(40, 2);
-      console.log({
-        instance,
-        result
-      });
+      console.log({instance, result});
     });
 
-    // 2d way
-
-    const loadWASM2 = (url, importObject) => fetch(url)
-      .then(response => response.arrayBuffer())
-      .then(buffer => WebAssembly.compile(buffer))
-      .then(module => new WebAssembly.Instance(module, importObject));
-
-    loadWASM2('sum.wasm', importObject).then(instance => {
-      const {
-        exports
-      } = instance;
-      const result = exports._sum(40, 2);
-      console.log({
-        instance,
-        result
-      });
-    });
-
-    // 3d
-
-    const loadWASM3 = async (url, importObject) => {
+    // 2d option ------------------------
+    const loadWASM2 = async (url, importObject) => {
       const buffer = await fetch(url).then(r => r.arrayBuffer());
       const result = await WebAssembly.instantiate(buffer, importObject);
       return result.instance;
     };
 
-    loadWASM3('sum.wasm', importObject).then(instance => {
-      const {
-        exports
-      } = instance;
+    loadWASM2('sum.wasm', importObject).then(instance => {
+      const {exports} = instance;
       const result = exports._sum(40, 2);
-      console.log({
-        instance,
-        result
-      });
+      console.log({instance, result});
     });
+
+    // 3d way, disabled because:
+    // RangeError: WebAssembly.Instance is disallowed on the main thread, if the buffer size is larger than 4KB. Use WebAssembly.instantiate.
+    // Note: To generate fib-module with html example smaller than 11kb, use option -g2 instead of -g4
+
+    // const loadWASM3 = (url, importObject) => fetch(url)
+    //   .then(response => response.arrayBuffer())
+    //   .then(buffer => WebAssembly.compile(buffer))
+    //   .then(module => new WebAssembly.Instance(module, importObject));
+
+    // loadWASM3('sum.wasm', importObject).then(instance => {
+    //   const {exports} = instance;
+    //   const result = exports._sum(40, 2);
+    //   console.log({
+    //     instance,
+    //     result
+    //   });
+    // });
+
   </script>
 </body>
 
