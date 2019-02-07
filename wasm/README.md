@@ -84,3 +84,4 @@
 - [wasm how to start, ru](https://medium.com/@reklatsmasters/webassembly-for-beginners-d3ce859cb007)
 - [zandaqo/iswasmfast](https://github.com/zandaqo/iswasmfast)
 - [rust and webassembly in 2019](http://fitzgeraldnick.com/2018/12/14/rust-and-webassembly-in-2019.html)
+- [emscripten-npm](https://developers.google.com/web/updates/2019/01/emscripten-npm)

@@ -12,12 +12,13 @@ It contains libavcodec, libavutil, libavformat, libavfilter, libavdevice, libsws
 - [Install](#install)
 - [Docs](#docs)
   - [Tools](#tools)
-    - [Shared options](#shared-options)
+    - [ffmpeg options](#ffmpeg-options)
   - [Devices](#devices)
   - [Video Sources](#video-sources)
   - [Utils](#utils)
     - [Video Size](#video-size)
     - [Video Rate](#video-rate)
+    - [ffprobe](#ffprobe)
     - [Colors](#colors)
 - [Examples](#examples)
 
@@ -65,6 +66,12 @@ It contains libavcodec, libavutil, libavformat, libavfilter, libavdevice, libsws
 - `ntsc` or `30000/1001`, original aspect ratio 720x480 (1.5)
 - `pal` or `25/1`, original aspect ratio 720x576 (1.25)
 - `film` or `24/1`
+
+#### ffprobe
+
+- `ffprobe -h > ffprobe_help.txt` redirects the ffprobe help to a file
+- `ffprobe -report SOMEFILE.mp4` creates a report next to your file
+- `ffprobe -v quiet -print_format json -show_format -show_streams SOMEFILE.mp4 > ffprobe.json` creates your report as .json file next to your file
 
 #### Colors
 

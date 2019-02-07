@@ -8,6 +8,9 @@
 - [The Moving Picture Experts Group](https://mpeg.chiariglione.org/)
 - [DASH Behind the Scenes](https://mpeg.chiariglione.org/news/dash-behind-scenes)
 - [ffmpeg libav tutorial](https://github.com/leandromoreira/ffmpeg-libav-tutorial)
+- [video onboarding](https://www.eyevinntechnology.se/#/onboarding)
+- [digital video introduction](https://github.com/leandromoreira/digital_video_introduction)
+- [what is cmaf](https://www.wowza.com/blog/what-is-cmaf)
 
 ## Technologies
 
