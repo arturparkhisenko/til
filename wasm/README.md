@@ -85,3 +85,10 @@
 - [zandaqo/iswasmfast](https://github.com/zandaqo/iswasmfast)
 - [rust and webassembly in 2019](http://fitzgeraldnick.com/2018/12/14/rust-and-webassembly-in-2019.html)
 - [emscripten-npm](https://developers.google.com/web/updates/2019/01/emscripten-npm)
+- [dev google hotpath-with-wasms](https://developers.google.com/web/updates/2019/02/hotpath-with-wasms)
+- [the-design-of-webassembly](https://medium.freecodecamp.org/the-design-of-webassembly-81f1dcabaddd)
+- Wasm troubles series:
+  - [1. wasm-is-not-a-stack-machine](http://troubles.md/posts/wasm-is-not-a-stack-machine/)
+  - [2. why-do-we-need-the-relooper-algorithm-again](http://troubles.md/posts/why-do-we-need-the-relooper-algorithm-again/)
+  - [3. the-stack-is-not-the-stack](http://troubles.md/posts/the-stack-is-not-the-stack/)
+  - [4. microwasm](http://troubles.md/posts/microwasm/)

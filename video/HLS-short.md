@@ -1,4 +1,4 @@
-# HLS
+# HTTP Live Streaming (HLS)
 
 > [specification rfc](https://tools.ietf.org/html/rfc8216)
 

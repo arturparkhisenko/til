@@ -1,5 +1,21 @@
 # Video
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [URLs](#urls)
+- [Technologies](#technologies)
+- [DRM](#drm)
+- [Examples](#examples)
+- [Articles](#articles)
+  - [Kostya's Boring Codec World](#kostyas-boring-codec-world)
+- [Videos](#videos)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## URLs
+
 - [ffmpeg.org](https://www.ffmpeg.org/) the multimedia framework
 - [ffmpeg.tv](http://ffmpeg.tv/) ffmpeg basics
 - [html5-video-everything-i-needed-to-know](http://ronallo.com/blog/html5-video-everything-i-needed-to-know/) updated: 2012-12-27
@@ -17,6 +33,7 @@
 - [DASH, MPEG-DASH, Dynamic Adaptive Streaming over HTTP](https://www.encoding.com/mpeg-dash/), [wiki](https://en.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP)
 - [HLS, HTTP Live Streaming](https://developer.apple.com/streaming/)
 - [CMAF, Common Media Application Format](https://blogs.akamai.com/2016/06/cmaf-what-it-is-and-why-it-may-change-your-ott-future.html)
+- [LHLS, Low Latency HLS](https://medium.com/freshdevelopers/implementing-lhls-on-hls-js-4fc4558edff2) and [implementation](https://github.com/openfresh/hls.js/commit/8e6746ba0393e424a92c7b5de340e037fdd5e177)
 
 ## DRM
 
@@ -29,6 +46,8 @@
 ## Articles
 
 - [CMAF with HLS](https://developer.apple.com/documentation/http_live_streaming/about_the_common_media_application_format_with_http_live_streaming)
+- [better-web-video-with-av1-codec](https://evilmartians.com/chronicles/better-web-video-with-av1-codec)
+- [av1-beats-x264-and-libvpx-vp9-in-practical-use-case](https://code.fb.com/video-engineering/av1-beats-x264-and-libvpx-vp9-in-practical-use-case/)
 
 ### Kostya's Boring Codec World
 
