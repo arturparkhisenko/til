@@ -16,11 +16,14 @@ It contains libavcodec, libavutil, libavformat, libavfilter, libavdevice, libsws
   - [Devices](#devices)
   - [Video Sources](#video-sources)
   - [Utils](#utils)
-    - [Video Size](#video-size)
+    - [Video Size abbreviations](#video-size-abbreviations)
     - [Video Rate](#video-rate)
     - [ffprobe](#ffprobe)
     - [Colors](#colors)
 - [Examples](#examples)
+  - [Working with .mov](#working-with-mov)
+  - [GIF to video](#gif-to-video)
+  - [Concatenation](#concatenation)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -38,8 +41,19 @@ It contains libavcodec, libavutil, libavformat, libavfilter, libavdevice, libsws
 
 #### ffmpeg options
 
-- `ffmpeg -i input output` input option
-- `ffmpeg -f` fmt (input/output), force input or output file format
+- `-i input output` input output files (can handle audio and video streams for each file)
+- `-f` fmt (input/output), force input or output file format
+- `-map_metadata -1` will remove video metadata.
+- `-c:a libopus or -c:a libfdk_aac` selects an audio codec.
+- `-c:v libaom-av1` selects a video codec, a library to compress images into a video stream.
+- `-preset veryslow` forces H.264 and HEVC codecs to generate smaller video file even if it will be much longer.
+- `-profile:v main` that we use in our H.264 command selects the video codec profile. We can only use “Main”, as our video will not be played in Safari otherwise.
+- `-b:v 0` a sets minimum bitrate to force the constant quality mode in AV1.
+- `-pix_fmt yuv420p` (pixel format) is a trick to reduce the size of a video. Basically, it uses full resolution for brightness and a smaller resolution for color. It is a way to fool a human eye, and you can safely remove this argument if it does not work in your case. Use `-pix_fmts` to ouput all other values.
+- `-movflags +faststart` moves the important information to the beginning of the file. It allows browser to start playing video during downloading. Recommended.
+- `-vf "scale=trunc(iw/2)*2:trunc(ih/2)*2"` is a way to ensure the produced video will always have an even size (some codecs will only work with sizes like 300x200 and 302x200, but not with 301x200). This option tells FFmpeg to scale the source for the closes even resolution. If your video dimensions were even in the first place, it would not do anything.
+- `-strict experimental` option needs to be used for AV1, AV1 encoder is still experimental.
+- `-crf 34` stands for Constant Rate Factor and sets your size and quality balance. 0 stands for best quality and bigger size. CRF scale is different for H.264 and AV1: H.264 goes from 0 to 51, AV1 from 0 to 61. According to this [av1-beats-x264-and-libvpx-vp9-in-practical-use-case](https://code.fb.com/video-engineering/av1-beats-x264-and-libvpx-vp9-in-practical-use-case/) guide by Facebook, here are the optimal mappings between H.264 and AV1 CRF values: 19 → 27, 23 → 33, 27 → 39, 31 → 45, 35 → 51, 39 → 57.
 
 ### [Devices](https://www.ffmpeg.org/ffmpeg-devices.html)
 
@@ -54,7 +68,7 @@ It contains libavcodec, libavutil, libavformat, libavfilter, libavdevice, libsws
 
 ### [Utils](https://ffmpeg.org/ffmpeg-utils.html)
 
-#### Video Size
+#### [Video Size abbreviations](https://ffmpeg.org/ffmpeg-utils.html#video-size-syntax)
 
 - `hd480` or `852x480`
 - `hd720` or `1280x720`
@@ -89,3 +103,69 @@ As pipeline: `VideoSource` -> `Device` -> `Tool` -> Output.
 - `ffplay -f lavfi color=c=red@0.2` color with opacity `0.2`
 - `ffplay -f lavfi rgbtestsrc` three bars
 - `ffprobe -v error -show_format -show_streams input.mp4` show analyze results
+
+### Working with .mov
+
+- `ffmpeg -i SOURCE.mov -map_metadata -1 -c:a libfdk_aac -c:v libx264 -crf 24 -preset veryslow -profile:v main -pix_fmt yuv420p -movflags +faststart -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" video.h264.mp4` - generate .h264.mp4
+- `ffmpeg -i SOURCE.mov -map_metadata -1 -c:a libopus -c:v libaom-av1 -crf 34 -b:v 0 -pix_fmt yuv420p -movflags +faststart -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -strict experimental video.av1.mp4` - generate .av1.mp4
+- `ffmpeg -i SOURCE.mov -map_metadata -1 -c:a libfdk_aac -c:v libx265 -crf 24 -preset veryslow -pix_fmt yuv420p -movflags +faststart -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" video.hevc.mp4` - generate .hevc.mp4
+
+```html
+<video controls width="600" height="400">
+  <source
+    src="video.hevc.mp4"
+    type="video/mp4; codecs=hevc,mp4a.40.2"
+  />
+  <source
+    src="video.av1.mp4"
+    type="video/mp4; codecs=av01.0.05M.08,opus"
+  />
+  <source
+    src="video.h264.mp4"
+    type="video/mp4; codecs=avc1.4D401E,mp4a.40.2"
+  />
+</video>
+```
+
+### GIF to video
+
+> [demo](https://arturparkhisenko.github.io/til/video/gif-to-video/index.html)
+
+We can use `animation.h264.mp4` and `animation.av1.mp4` in our HTML. Just replace VIDEO_WIDTH, VIDEO_HEIGHT, and PATH_TO_VIDEO:
+
+```html
+<video
+  autoplay
+  loop
+  muted
+  playsinline
+  width="VIDEO_WIDTH"
+  height="VIDEO_HEIGHT"
+>
+  <source
+    src="PATH_TO_VIDEO/animation.av1.mp4"
+    type="video/mp4; codecs=av01.0.05M.08"
+  />
+  <source
+    src="PATH_TO_VIDEO/animation.h264.mp4"
+    type="video/mp4"
+  />
+</video>
+```
+
+- `ffmpeg -i IMAGE.gif -map_metadata -1 -an -c:v libx264 -crf 24 -preset veryslow -profile:v main -pix_fmt yuv420p -movflags +faststart -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" animation.h264.mp4` GIF to H.264
+- `ffmpeg -i IMAGE.gif -map_metadata -1 -an -c:v libx265 -crf 24 -b:v 0 -pix_fmt yuv420p -movflags +faststart -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -strict experimental animation.hevc.mp4` GIF to H.265/HEVC
+- `ffmpeg -i IMAGE.gif -map_metadata -1 -an -c:v libaom-av1 -crf 24 -b:v 0 -pix_fmt yuv420p -movflags +faststart -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -strict experimental animation.av1.mp4` GIF to AV1
+
+### Concatenation
+
+- [how-to-concatenate-two-mp4-files-using-ffmpeg](https://stackoverflow.com/questions/7333232/how-to-concatenate-two-mp4-files-using-ffmpeg)
+
+- how to concatenate video and audio
+
+```shell
+# Creates 8 seconds long test video with video and audio
+ffmpeg -f lavfi -i "sine=frequency=528:duration=8" -c:a pcm_s16le wine-sin-528.wav
+ffmpeg -f lavfi -i testsrc2=duration=8:size=hd1080:rate=30 testsrc.mp4
+ffmpeg -i testsrc.mp4 -i wine-sin-528.wav -c:v copy -c:a aac -b:a 128k -ac 2 test-wave.mp4
+```

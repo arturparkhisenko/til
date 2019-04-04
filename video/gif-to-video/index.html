@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>gif-to-video examples</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>gif-to-video examples</h1>
+
+    <h2>H.264 or MPEG-4 Part 10, Advanced Video Coding (MPEG-4 AVC)</h2>
+
+    <video autoplay controls height="260" loop muted playsinline width="540">
+      <source
+        src="animation.h264.mp4"
+        type="video/mp4; codecs=avc1.4D401E,mp4a.40.2"
+      />
+    </video>
+
+    <br />
+
+    <h2>H.265/HEVC</h2>
+
+    <video autoplay controls height="260" loop muted playsinline width="540">
+      <source
+        src="animation.hevc.mp4"
+        type="video/mp4; codecs=hevc,mp4a.40.2"
+      />
+    </video>
+
+    <br />
+
+    <h2>AOMedia Video 1 (AV1)</h2>
+
+    <video autoplay controls height="260" loop muted playsinline width="540">
+      <source
+        src="animation.av1.mp4"
+        type="video/mp4; codecs=av01.0.05M.08,opus"
+      />
+    </video>
+  </body>
+</html>
