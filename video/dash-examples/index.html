@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>dash examples</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      video {
+        height: 180px;
+        width: 320px;
+      }
+    </style>
+    <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
+  </head>
+  <body>
+    <h1>dash examples</h1>
+
+    <code>
+      ffmpeg -i testsrc-hd720-rate24.h264.mp4 -codec copy -f dash -seg_duration 2 -use_template 1 -use_timeline 1 test-1/testsrc.mpd
+    </code>
+    <br/>
+    <video
+      autoplay
+      controls
+      data-dashjs-player
+      loop
+      muted
+      src="test-1/testsrc.mpd"
+    ></video>
+
+    <br/>
+
+    <code>
+      ffmpeg -i testsrc-hd720-rate24.h264.mp4  -c copy -f dash -window_size 20 -seg_duration 4 -single_file 1 -init_seg_name initavatar-stream\$RepresentationID\$.m4s -media_seg_name chunkavatar-stream\$RepresentationID\$-\$Number%05d\$.m4s -use_template 0 test-2/testsrc.mpd
+    </code>
+    <br/>
+    <video
+      autoplay
+      controls
+      data-dashjs-player
+      loop
+      muted
+      src="test-2/testsrc.mpd"
+    ></video>
+
+    <br/>
+
+    <code>
+      ffmpeg -i testsrc-hd720-rate24.h264.mp4 -codec copy -f dash -seg_duration 4 -use_template 1 -use_timeline 1 -init_seg_name '$RepresentationID$-init.m4s' -profile:1 main -media_seg_name '$RepresentationID$-$Time$.m4s' test-3/testsrc.mpd
+    </code>
+    <br/>
+    <video
+      autoplay
+      controls
+      data-dashjs-player
+      loop
+      muted
+      src="test-3/testsrc.mpd"
+    ></video>
+
+  </body>
+</html>

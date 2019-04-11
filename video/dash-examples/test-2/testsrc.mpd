@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MPD xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="urn:mpeg:dash:schema:mpd:2011"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xsi:schemaLocation="urn:mpeg:DASH:schema:MPD:2011 http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-DASH_schema_files/DASH-MPD.xsd"
+	profiles="urn:mpeg:dash:profile:isoff-live:2011"
+	type="static"
+	mediaPresentationDuration="PT10.1S"
+	minBufferTime="PT20.2S">
+	<ProgramInformation>
+	</ProgramInformation>
+	<Period id="0" start="PT0.0S">
+		<AdaptationSet id="0" contentType="video" segmentAlignment="true" bitstreamSwitching="true" lang="und">
+			<Representation id="0" mimeType="video/mp4" codecs="avc1.4d4032" bandwidth="74573" width="1280" height="720" frameRate="24/1">
+				<BaseURL>testsrc-stream0.m4s</BaseURL>
+				<SegmentList timescale="1000000" duration="10125000" startNumber="1">
+					<Initialization range="0-807" />
+					<SegmentURL mediaRange="808-97297" />
+				</SegmentList>
+			</Representation>
+		</AdaptationSet>
+	</Period>
+</MPD>
