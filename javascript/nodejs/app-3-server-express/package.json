@@ -11,8 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.2",
-    "hbs": "^4.0.1",
-    "nodemon": "^1.12.7"
+    "express": "^4.17.1",
+    "hbs": "^4.0.4",
+    "nodemon": "^1.19.1"
   }
 }

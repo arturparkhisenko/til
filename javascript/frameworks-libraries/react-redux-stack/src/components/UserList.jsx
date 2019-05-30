@@ -11,7 +11,6 @@ const Li = styled.li`
 `;
 
 const UlStyled = styled(Ul)`
-  font-style: italic;
   font-family: monospace;
 `;
 
@@ -20,9 +19,6 @@ class UserList extends Component {
     console.log('UserList props', this.props); // {users}
     return (
       <Ul className="UserList">
-        {this.props.users.map(user => {
-          return <Li key={user}>{user}</Li>;
-        })}
         <UlStyled className="UserList">
           {this.props.users.map(user => {
             return <Li key={user}>{user}</Li>;

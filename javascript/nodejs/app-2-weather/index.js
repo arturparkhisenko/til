@@ -4,14 +4,16 @@ const weather = require('./weather');
 
 const argv = yargs.options({
   address: {
-    demand: true,
     alias: 'a',
     describe: 'Address to fetch weather for',
-    string: true
+    string: true,
+    default: 'London'
   }
 }).help().alias('help', 'h').argv;
 
-const encodedAddress = encodeURIComponent(argv.address || 'London');
+const encodedAddress = encodeURIComponent(argv.address);
+
+console.log(encodedAddress);
 
 const farToCel = (f) => {
   return ((f - 32) / 1.8).toFixed(2);
