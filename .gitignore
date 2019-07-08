@@ -91,6 +91,7 @@ Temporary Items
 .apdisk
 $RECYCLE.BIN/
 .package-lock.json
+.vscode
 
 # git credential file #
 #######################
