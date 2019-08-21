@@ -110,6 +110,15 @@ As pipeline: `VideoSource` -> `Device` -> `Tool` -> Output.
 - `ffmpeg -i SOURCE.mov -map_metadata -1 -c:a libopus -c:v libaom-av1 -crf 34 -b:v 0 -pix_fmt yuv420p -movflags +faststart -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -strict experimental video.av1.mp4` - generate .av1.mp4
 - `ffmpeg -i SOURCE.mov -map_metadata -1 -c:a libfdk_aac -c:v libx265 -crf 24 -preset veryslow -pix_fmt yuv420p -movflags +faststart -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" video.hevc.mp4` - generate .hevc.mp4
 
+- `ffmpeg -f lavfi -i testsrc=duration=6:size=1920x1080:rate=24 -c:a libfdk_aac -c:v libx264 testsrc.mp4` and `ffmpeg -i testsrc.mp4 -c copy testsrc.ts`
+- ```shell
+ffmpeg -re -i testsrc.mp4 \
+  -codec copy -map 0 \
+  -f segment -segment_list playlist.m3u8 \
+  -segment_list_flags +live -segment_time 2 \
+  out%03d.ts
+```
+
 ```html
 <video controls width="600" height="400">
   <source
