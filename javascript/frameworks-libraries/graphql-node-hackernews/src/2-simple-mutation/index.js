@@ -1,6 +1,6 @@
 const { GraphQLServer } = require('graphql-yoga');
 
-// 3. [A simple mutation](https://www.howtographql.com/graphql-js/3-a-simple-mutation/)
+// 2. [A simple mutation](https://www.howtographql.com/graphql-js/3-a-simple-mutation/)
 
 let links = [
   {
@@ -63,7 +63,7 @@ const resolvers = {
   }
 };
 
-/**  
+/**
 query {
   feed {
     id
@@ -86,10 +86,10 @@ mutation {
 
 /**
 Exercise
-If you want to practice implementing GraphQL resolvers a bit more, 
-here’s an optional challenge for you. Based on your current 
-implementation, extend the GraphQL API with full CRUD functionality 
-for the Link type. In particular, implement the queries and mutations 
+If you want to practice implementing GraphQL resolvers a bit more,
+here’s an optional challenge for you. Based on your current
+implementation, extend the GraphQL API with full CRUD functionality
+for the Link type. In particular, implement the queries and mutations
 that have the following definitions:
 
 type Query {
