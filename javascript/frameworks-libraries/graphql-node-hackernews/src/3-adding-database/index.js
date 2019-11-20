@@ -2,16 +2,6 @@ const { GraphQLServer } = require('graphql-yoga');
 
 // 3. [Adding a Database](https://www.howtographql.com/graphql-js/4-adding-a-database/)
 
-let links = [
-  {
-    id: 'link-0',
-    description: 'Fullstack tutorial for GraphQL',
-    url: 'www.howtographql.com'
-  }
-];
-
-let idCount = links.length;
-
 const resolvers = {
   Query: {
     info: () => `This is the API of a Hackernews Clone`,
@@ -63,51 +53,8 @@ const resolvers = {
   }
 };
 
-/**
-query {
-  feed {
-    id
-    url
-    description
-  }
-}
-*/
-
-/**
-mutation {
-  post(
-    url: "www.prisma.io"
-    description: "Prisma replaces traditional ORMs"
-  ) {
-    id
-  }
-}
-*/
-
-/**
-Exercise
-If you want to practice implementing GraphQL resolvers a bit more,
-here’s an optional challenge for you. Based on your current
-implementation, extend the GraphQL API with full CRUD functionality
-for the Link type. In particular, implement the queries and mutations
-that have the following definitions:
-
-type Query {
-  # Fetch a single link by its `id`
-  link(id: ID!): Link
-}
-
-type Mutation {
-  # Update a link
-  updateLink(id: ID!, url: String, description: String): Link
-
-  # Delete a link
-  deleteLink(id: ID!): Link
-}
-*/
-
 const server = new GraphQLServer({
-  typeDefs: './src/schema.graphql',
+  typeDefs: './generated/schema.graphql',
   resolvers
 });
 

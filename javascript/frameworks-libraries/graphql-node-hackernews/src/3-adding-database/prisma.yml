@@ -3,13 +3,11 @@
 endpoint: http://localhost:4466
 
 # Points to the file that contains your datamodel
-datamodel: ./model/datamodel.prisma
+datamodel: ./datamodel.prisma
 
 # Specifies language & location for the generated Prisma client
 generate:
   - generator: javascript-client
     output: ./generated/prisma-client
-
-hooks:
-  post-deploy:
-    - prisma generate
+  - generator: graphql-schema
+    output: ./generated/schema.graphql
