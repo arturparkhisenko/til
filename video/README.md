@@ -37,7 +37,7 @@
 
 ## DRM
 
-- [FairPlay Streaming](https://developer.apple.com/streaming/fps/)
+- [Go to the DRM.md](DRM.md)
 
 ## Examples
 

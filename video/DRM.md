@@ -4,6 +4,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
+- [DRM overview](#drm-overview)
 - [High-bandwidth Digital Content Protection (HDCP)](#high-bandwidth-digital-content-protection-hdcp)
 - [Implementations](#implementations)
   - [FairPlay Streaming by Apple](#fairplay-streaming-by-apple)
@@ -14,6 +15,10 @@
 - [DRM comparison](#drm-comparison)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## DRM overview
+
+- [DRM, drmnow.pro](https://drmnow.pro/drm/)
 
 ## High-bandwidth Digital Content Protection (HDCP)
 
@@ -31,6 +36,8 @@
 - [Standards](https://www.microsoft.com/playready/standards/)
 
 ### Widevine Modular by Google
+
+- [Widevine](https://www.widevine.com/)
 
 ## Providers
 
