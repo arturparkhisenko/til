@@ -1,0 +1,13 @@
+type Player {
+  id: ID! @id @unique
+  createdAt: DateTime! @createdAt
+  btag: String!
+  serverType: ServerType!
+}
+
+enum ServerType {
+  PVE
+  PVP
+  PvPRP
+  RP
+}
