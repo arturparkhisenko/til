@@ -30,6 +30,7 @@ It contains libavcodec, libavutil, libavformat, libavfilter, libavdevice, libsws
 ## Install
 
 - `brew install ffmpeg`
+- [With all 3d party plugins](https://github.com/varenc/homebrew-ffmpeg)
 
 ## [Docs](https://ffmpeg.org/documentation.html)
 
@@ -177,4 +178,8 @@ We can use `animation.h264.mp4` and `animation.av1.mp4` in our HTML. Just replac
 ffmpeg -f lavfi -i "sine=frequency=528:duration=8" -c:a pcm_s16le wine-sin-528.wav
 ffmpeg -f lavfi -i testsrc2=duration=8:size=hd1080:rate=30 testsrc.mp4
 ffmpeg -i testsrc.mp4 -i wine-sin-528.wav -c:v copy -c:a aac -b:a 128k -ac 2 test-wave.mp4
+# Merging video and audio, with audio re-encoding
+ffmpeg -i testsrc.mp4 -i wine-sin-528.wav -c:v copy -c:a aac -strict experimental test-merge-av.mp4
+# Replacing audio stream
+ffmpeg -i testsrc.mp4 -i wine-sin-528.wav -c:v copy -c:a aac -strict experimental -map 0:v:0 -map 1:a:0 test-replace-audio.mp4
 ```
