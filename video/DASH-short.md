@@ -85,7 +85,7 @@ This part of ISO/IEC 23009 primarily defines two formats:
 ### Generate with ffmpeg
 
 ```sh
-# ffmpeg -i testsrc-hd720-rate24.h264.mp4 -codec copy -f dash test-1/testsrc.mpd
+ffmpeg -i testsrc-hd720-rate24.h264.mp4 -codec copy -f dash test-1/testsrc.mpd
 
 ffmpeg -i testsrc-hd720-rate24.h264.mp4 -codec copy -f dash -seg_duration 2 -use_template 1 -use_timeline 1 test-1/testsrc.mpd
 

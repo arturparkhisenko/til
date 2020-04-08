@@ -104,6 +104,7 @@ As pipeline: `VideoSource` -> `Device` -> `Tool` -> Output.
 - `ffplay -f lavfi color=c=red@0.2` color with opacity `0.2`
 - `ffplay -f lavfi rgbtestsrc` three bars
 - `ffprobe -v error -show_format -show_streams input.mp4` show analyze results
+- `ffmpeg -ss 00:00:00 -i source.mp4 -to 00:00:42 -c copy source-short.mp4` trim video duration, 0 -> 42s
 
 ### Working with .mov
 
@@ -111,14 +112,19 @@ As pipeline: `VideoSource` -> `Device` -> `Tool` -> Output.
 - `ffmpeg -i SOURCE.mov -map_metadata -1 -c:a libopus -c:v libaom-av1 -crf 34 -b:v 0 -pix_fmt yuv420p -movflags +faststart -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -strict experimental video.av1.mp4` - generate .av1.mp4
 - `ffmpeg -i SOURCE.mov -map_metadata -1 -c:a libfdk_aac -c:v libx265 -crf 24 -preset veryslow -pix_fmt yuv420p -movflags +faststart -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" video.hevc.mp4` - generate .hevc.mp4
 
+### Working with HLS
+
 - `ffmpeg -f lavfi -i testsrc=duration=6:size=1920x1080:rate=24 -c:a libfdk_aac -c:v libx264 testsrc.mp4` and `ffmpeg -i testsrc.mp4 -c copy testsrc.ts`
-- ```shell
-ffmpeg -re -i testsrc.mp4 \
-  -codec copy -map 0 \
-  -f segment -segment_list playlist.m3u8 \
-  -segment_list_flags +live -segment_time 2 \
-  out%03d.ts
-```
+- `ffmpeg -re -i testsrc.mp4 -codec copy -map 0 -f segment -segment_list playlist.m3u8 -segment_list_flags +live -segment_time 2 out%03d.ts`
+
+### Working with DASH
+
+- `ffmpeg -f lavfi -i testsrc=duration=42:size=hd1080:rate=24 -movflags frag_keyframe+empty_moov+default_base_moof testsrc-hd1080-rate24.h264.fragmented.mp4` generate fmp4
+- `ffmpeg -i non_fragmented.mp4 -movflags frag_keyframe+empty_moov+default_base_moof fragmented.mp4` transform to fmp4
+- `ffmpeg -i fragmented.mp4 -codec copy -f dash master.mpd` dash mpd, [more examples](DASH-short.md#generate-with-ffmpeg)
+- `ffmpeg -i testsrc-hd720-rate24.h264.mp4  -c copy -f dash -window_size 20 -seg_duration 4 -single_file 1 test-1/master.mpd`
+
+### HTML markup for test
 
 ```html
 <video controls width="600" height="400">

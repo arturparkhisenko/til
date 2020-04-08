@@ -103,3 +103,6 @@ package-lock.json
 
 # Rust
 rust/**/target/
+
+# Parcel
+.parcel-cache
