@@ -22,6 +22,9 @@ It contains libavcodec, libavutil, libavformat, libavfilter, libavdevice, libsws
     - [Colors](#colors)
 - [Examples](#examples)
   - [Working with .mov](#working-with-mov)
+  - [Working with HLS](#working-with-hls)
+  - [Working with DASH](#working-with-dash)
+  - [HTML markup for test](#html-markup-for-test)
   - [GIF to video](#gif-to-video)
   - [Concatenation](#concatenation)
 
@@ -115,7 +118,8 @@ As pipeline: `VideoSource` -> `Device` -> `Tool` -> Output.
 ### Working with HLS
 
 - `ffmpeg -f lavfi -i testsrc=duration=6:size=1920x1080:rate=24 -c:a libfdk_aac -c:v libx264 testsrc.mp4` and `ffmpeg -i testsrc.mp4 -c copy testsrc.ts`
-- `ffmpeg -re -i testsrc.mp4 -codec copy -map 0 -f segment -segment_list playlist.m3u8 -segment_list_flags +live -segment_time 2 out%03d.ts`
+- `ffmpeg -re -i testsrc.mp4 -codec copy -map 0 -f segment -segment_list playlist.m3u8 -segment_list_flags +live -segment_time 2 out%03d.ts` - re-stream live content
+- `ffmpeg -i video.mpg -f hls -master_pl_name master.m3u8 chunks.m3u8` with master playlist
 
 ### Working with DASH
 

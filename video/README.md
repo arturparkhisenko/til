@@ -6,6 +6,7 @@
 
 - [URLs](#urls)
 - [Technologies](#technologies)
+- [Closed Captions](#closed-captions)
 - [DRM](#drm)
 - [Examples](#examples)
 - [Articles](#articles)
@@ -27,6 +28,7 @@
 - [video onboarding](https://www.eyevinntechnology.se/#/onboarding)
 - [digital video introduction](https://github.com/leandromoreira/digital_video_introduction)
 - [what is cmaf](https://www.wowza.com/blog/what-is-cmaf)
+- [Bento4](https://github.com/axiomatic-systems/Bento4) Full-featured MP4 format and MPEG DASH library and tools, [site](https://www.bento4.com/)
 
 ## Technologies
 
@@ -34,6 +36,11 @@
 - [HLS, HTTP Live Streaming](https://developer.apple.com/streaming/)
 - [CMAF, Common Media Application Format](https://blogs.akamai.com/2016/06/cmaf-what-it-is-and-why-it-may-change-your-ott-future.html)
 - [LHLS, Low Latency HLS](https://medium.com/freshdevelopers/implementing-lhls-on-hls-js-4fc4558edff2) and [implementation](https://github.com/openfresh/hls.js/commit/8e6746ba0393e424a92c7b5de340e037fdd5e177)
+
+## Closed Captions
+
+- [Go to the CC.md](CC.md)
+- [Adobe, Introduction to Closed Captions](https://www.adobe.com/content/dam/acom/en/devnet/video/pdfs/introduction_to_closed_captions.pdf)
 
 ## DRM
 
