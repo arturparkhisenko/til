@@ -8,8 +8,9 @@
 
 ## Guide how to write an ISO to the sd-card
 
+- Use `Raspberry Pi Imager` from the official documentation or try next step
 - `diskutil list` output disk info with name
-- `sudo dd bs=1m if=2018-11-13-raspbian-stretch-lite.img of=/dev/rdisk2 conv=sync` example how to write, where in `rdisk2` a `2` is a sd-card disk number.
+  - `sudo dd bs=1m if=2018-11-13-raspbian-stretch-lite.img of=/dev/rdisk2 conv=sync` example how to write, where in `rdisk2` a `2` is a sd-card disk number.
 
 ## Get ip of the device
 
