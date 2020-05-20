@@ -19,7 +19,7 @@
 - [CMake](https://cmake.org/), `brew install cmake`
 - [Python](https://www.python.org/) 2.7+
 - One of: [GCC for Linux](https://gcc.gnu.org/), [Xcode for MacOS](https://developer.apple.com/xcode/), [VisualStudio 2015+ for Windows](https://visualstudio.microsoft.com/)
-- [Toolchain](https://webassembly.org/getting-started/developers-guide/#downloading-or-compiling-the-toolchain)
+- [Toolchain](https://webassembly.org/getting-started/developers-guide/)
 - I also use `wabt` from the tools section.
 
 ## Commands
@@ -35,11 +35,10 @@
 
 ## Some docs
 
-- [config .emscripten](https://kripken.github.io/emscripten-site/docs/building_from_source/building_emscripten_from_source_on_mac_os_x.html#configuring-emscripten-settings)
-- [Deploying-Pages](https://kripken.github.io/emscripten-site/docs/compiling/Deploying-Pages.html)
-- [Interacting-with-code](https://kripken.github.io/emscripten-site/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html)
+- [Deploying-Pages](https://emscripten.org/docs/compiling/Deploying-Pages.html)
+- [Interacting-with-code](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html)
 
-### Options [emscripten](https://kripken.github.io/emscripten-site/docs/tools_reference/emcc.html)
+### Options [emscripten](https://emscripten.org/docs/tools_reference/emcc.html)
 
 > all options here [settings](https://github.com/emscripten-core/emscripten/blob/master/src/settings.js)
 
@@ -58,7 +57,7 @@
 
 - [binaryen](https://github.com/WebAssembly/binaryen) asm2wasm, s2wasm, wasm2asm, mir2wasm
 - [wabt](https://github.com/WebAssembly/wabt) wat2wasm, wasm2wat, wasm-objdump, wasm-interp, wat-desugar, wasm-link
-- [emscripten](https://kripken.github.io/emscripten-site/)
+- [emscripten](https://emscripten.org/)
 - [WasmExplorer](https://mbebenita.github.io/WasmExplorer/)
 - [webassembly.studio](https://webassembly.studio/)
 - [WasmCodeExplorer](https://wasdk.github.io/wasmcodeexplorer/)
@@ -68,7 +67,6 @@
 
 ## Url's
 
-- [wasmrocks](https://www.wasmrocks.com/)
 - [awesome-wasm](https://github.com/mbasso/awesome-wasm)
 - [cppwasm-book](https://3dgen.cn/cppwasm-book/en/), [source](https://github.com/3dgen/cppwasm-book)
 - [wasm-reference-manual](https://github.com/sunfishcode/wasm-reference-manual)

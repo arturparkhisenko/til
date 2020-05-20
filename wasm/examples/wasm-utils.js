@@ -1,11 +1,11 @@
-// https://mdn.github.io/webassembly-examples/wasm-utils.js
+// https://github.com/mdn/webassembly-examples/
 
 // 1. +++ fetchAndInstantiate() +++ //
 
 // This library function fetches the wasm module at 'url', instantiates it with
 // the given 'importObject', and returns the instantiated object instance
 
-function fetchAndInstantiate(url, importObject) {
+export function fetchAndInstantiate(url, importObject) {
   return fetch(url).then(response =>
     response.arrayBuffer()
   ).then(bytes =>
@@ -24,7 +24,7 @@ function fetchAndInstantiate(url, importObject) {
 // just the given URL) is versioned by dbVersion and any change in dbVersion on
 // any call to instantiateCachedURL() will conservatively clear out the entire
 // cache to avoid stale modules.
-function instantiateCachedURL(dbVersion, url, importObject) {
+export function instantiateCachedURL(dbVersion, url, importObject) {
   const dbName = 'wasm-cache';
   const storeName = 'wasm-cache';
 
