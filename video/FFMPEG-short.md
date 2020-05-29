@@ -147,7 +147,7 @@ As pipeline: `VideoSource` -> `Device` -> `Tool` -> Output.
 </video>
 ```
 
-### GIF to video
+### GIF to video and back
 
 > [demo](https://arturparkhisenko.github.io/til/video/gif-to-video/index.html)
 
@@ -173,9 +173,10 @@ We can use `animation.h264.mp4` and `animation.av1.mp4` in our HTML. Just replac
 </video>
 ```
 
-- `ffmpeg -i IMAGE.gif -map_metadata -1 -an -c:v libx264 -crf 24 -preset veryslow -profile:v main -pix_fmt yuv420p -movflags +faststart -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" animation.h264.mp4` GIF to H.264
-- `ffmpeg -i IMAGE.gif -map_metadata -1 -an -c:v libx265 -crf 24 -b:v 0 -pix_fmt yuv420p -movflags +faststart -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -strict experimental animation.hevc.mp4` GIF to H.265/HEVC
-- `ffmpeg -i IMAGE.gif -map_metadata -1 -an -c:v libaom-av1 -crf 24 -b:v 0 -pix_fmt yuv420p -movflags +faststart -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -strict experimental animation.av1.mp4` GIF to AV1
+- `ffmpeg -i image.gif -map_metadata -1 -an -c:v libx264 -crf 24 -preset veryslow -profile:v main -pix_fmt yuv420p -movflags +faststart -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" animation.h264.mp4` GIF to H.264, p.s. check `-vsync 0` [here](https://ffmpeg.org/ffmpeg.html#Advanced-options)
+- `ffmpeg -i image.gif -map_metadata -1 -an -c:v libx265 -crf 24 -b:v 0 -pix_fmt yuv420p -movflags +faststart -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -strict experimental animation.hevc.mp4` GIF to H.265/HEVC
+- `ffmpeg -i image.gif -map_metadata -1 -an -c:v libaom-av1 -crf 24 -b:v 0 -pix_fmt yuv420p -movflags +faststart -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -strict experimental animation.av1.mp4` GIF to AV1
+- `ffmpeg -i animation.h264.mp4 -filter_complex "[0:v] fps=18,scale=540:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" -loop 0 video-to-gif.gif` Video to GIF
 
 ### Concatenation
 
