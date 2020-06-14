@@ -25,7 +25,7 @@ It contains libavcodec, libavutil, libavformat, libavfilter, libavdevice, libsws
   - [Working with HLS](#working-with-hls)
   - [Working with DASH](#working-with-dash)
   - [HTML markup for test](#html-markup-for-test)
-  - [GIF to video](#gif-to-video)
+  - [GIF to video and back](#gif-to-video-and-back)
   - [Concatenation](#concatenation)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
