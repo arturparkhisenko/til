@@ -108,6 +108,7 @@ As pipeline: `VideoSource` -> `Device` -> `Tool` -> Output.
 - `ffplay -f lavfi rgbtestsrc` three bars
 - `ffprobe -v error -show_format -show_streams input.mp4` show analyze results
 - `ffmpeg -ss 00:00:00 -i source.mp4 -to 00:00:42 -c copy source-short.mp4` trim video duration, 0 -> 42s
+- [media/manipulating/cheatsheet, google](https://developers.google.com/web/fundamentals/media/manipulating/cheatsheet)
 
 ### Working with .mov
 
