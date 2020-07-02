@@ -21,10 +21,6 @@ ffmpeg -i testsrc-720p-24fps-h264-avc1-main-lvl4_0-420.mp4 -c copy -f dash -seg_
 ffmpeg -i testsrc-720p-24fps-h264-avc1-main-lvl4_0-420.mp4 -c copy -f dash -seg_duration 2 example-mpd-template-based/master.mpd
 ```
 
-## Examples
-
-- [Shaka](https://github.com/google/shaka-player/blob/547f1b5cab915765a02c4e4cb75946849097bfa8/lib/media/media_source_engine.js)
-
 ## URLs
 
 - [MSE specification](https://w3c.github.io/media-source/)
