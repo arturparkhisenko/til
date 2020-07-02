@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Media Source Extensions</title>
+    <style>
+      body {
+        margin: 1rem;
+        font-family: monospace;
+      }
+      #video {
+        background-color: gray;
+        width: 480px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>mse.js</h1>
+
+    <video id="video" controls></video>
+
+    <br>
+
+    <input
+      id="input"
+      type="text"
+      style="width: 470px;"
+    />
+
+    <nav>
+      <button id="reset">reset</button>
+      <button id="load">load</button>
+    </nav>
+
+    <h3>URLs for test</h3>
+    <div>
+      <code>
+        https://dash.akamaized.net/dash264/TestCases/1c/qualcomm/2/MultiRate.mpd
+        https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_4x3/bipbop_4x3_variant.m3u8
+      </code>
+    </div>
+
+    <script type="module" src="index.js"></script>
+  </body>
+</html>

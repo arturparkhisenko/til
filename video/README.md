@@ -6,6 +6,7 @@
 
 - [URLs](#urls)
 - [Technologies](#technologies)
+- [Terminology](#terminology)
 - [Closed Captions](#closed-captions)
 - [DRM](#drm)
 - [Examples](#examples)
@@ -36,6 +37,17 @@
 - [HLS, HTTP Live Streaming](https://developer.apple.com/streaming/)
 - [CMAF, Common Media Application Format](https://blogs.akamai.com/2016/06/cmaf-what-it-is-and-why-it-may-change-your-ott-future.html)
 - [LHLS, Low Latency HLS](https://medium.com/freshdevelopers/implementing-lhls-on-hls-js-4fc4558edff2) and [implementation](https://github.com/openfresh/hls.js/commit/8e6746ba0393e424a92c7b5de340e037fdd5e177)
+
+## Terminology
+
+- Encoding: raw -> H.264
+- Decoding: H.264 -> raw
+- Transcoding: H.264 -> H.265
+- Muxing: H.264 -> TS
+- Demuxing: TS -> H.264
+- Transmuxing: TS -> fMP4
+- Multiplexing: audio and video -> one data stream
+- Demultiplexing: one data stream -> audio and video
 
 ## Closed Captions
 

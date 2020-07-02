@@ -19,6 +19,7 @@ Current Publication date: 2014-05, Edition: 2.
       - [DASH High-Level Data Model](#dash-high-level-data-model)
 - [Examples](#examples)
   - [Generate with ffmpeg](#generate-with-ffmpeg)
+- [URLs](#urls)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -93,3 +94,9 @@ ffmpeg -i testsrc-hd720-rate24.h264.mp4  -c copy -f dash -window_size 20 -seg_du
 
 ffmpeg -i testsrc-hd720-rate24.h264.mp4 -codec copy -f dash -seg_duration 4 -use_template 1 -use_timeline 1 -init_seg_name '$RepresentationID$-init.m4s' -media_seg_name '$RepresentationID$-$Time$.m4s' test-3/testsrc.mpd
 ```
+
+## URLs
+
+- [DASH-IF Guidelines](https://dashif.org/guidelines/)
+- [DASH-IF Interoperability Points v4.3 2018, 3.3. Client Implementation Guidelines](https://dashif.org/docs/DASH-IF-IOP-v4.3.pdf)
+- [DASH-IF conformance tests](https://conformance.dashif.org/)
