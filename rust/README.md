@@ -6,6 +6,9 @@
 
 ## Tools
 
+- `cargo fmt` format
+- `cargo clippy` lint
+
 ### Visual Studio Code
 
 - [vscode/rust-lang](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust)
@@ -15,3 +18,4 @@
 ## Url's
 
 - [ctjhoa/rust-learning](https://github.com/ctjhoa/rust-learning)
+- [std library](https://doc.rust-lang.org/std/)
