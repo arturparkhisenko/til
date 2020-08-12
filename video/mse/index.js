@@ -10,7 +10,7 @@ let player = null;
 // Set default value for a test source file
 let href = document.location.href;
 let directory = href.substring(0, href.lastIndexOf('/')) + '/';
-elInput.value = directory + 'testsrc-720p-24fps-h264-avc1-main-lvl4_0-420.mp4';
+elInput.value = directory + 'example-mpd-playlist-based/master.mpd';
 
 buttonLoad.addEventListener('click', () => {
   console.log('Manifest URL', elInput.value);
