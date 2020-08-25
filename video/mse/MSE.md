@@ -5,7 +5,6 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Sources](#sources)
-- [Examples](#examples)
 - [URLs](#urls)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -16,14 +15,14 @@
 
 ```shell
 # progressive and fragmented: video/mp4; codecs="avc1.4d4028";
-ffmpeg -f lavfi -i testsrc=duration=7.42:size=1280x720:rate=24 -c:v libx264 -profile:v main -level:v 4.0 -pix_fmt yuv420p -movflags empty_moov+default_base_moof+frag_keyframe testsrc-progresive-fragmented.mp4
+ffmpeg -f lavfi -i testsrc=duration=7.42:size=1280x720:rate=24 -c:v libx264 -profile:v main -level:v 4.0 -pix_fmt yuv420p -movflags empty_moov+default_base_moof+frag_keyframe testsrc-progressive-fragmented.mp4
 
-ffmpeg -i testsrc-progresive-fragmented.mp4 -c copy -f dash -seg_duration 2 -single_file 1 example-mpd-playlist-based/master.mpd
+ffmpeg -i testsrc-progressive-fragmented.mp4 -c copy -f dash -seg_duration 2 -single_file 1 example-mpd-playlist-based/master.mpd
 
-ffmpeg -i testsrc-progresive-fragmented.mp4 -c copy -f dash -seg_duration 2 example-mpd-template-based/master.mpd
+ffmpeg -i testsrc-progressive-fragmented.mp4 -c copy -f dash -seg_duration 2 example-mpd-template-based/master.mpd
 
 # progressive but not fragmented
-ffmpeg -f lavfi -i testsrc=duration=7.42:size=1280x720:rate=24 -c:v libx264 -profile:v main -level:v 4.0 -pix_fmt yuv420p -movflags faststart testsrc-progresive.mp4
+ffmpeg -f lavfi -i testsrc=duration=7.42:size=1280x720:rate=24 -c:v libx264 -profile:v main -level:v 4.0 -pix_fmt yuv420p -movflags faststart testsrc-progressive.mp4
 
 # not progressive or fragmented
 ffmpeg -f lavfi -i testsrc=duration=7.42:size=1280x720:rate=24 -c:v libx264 -profile:v main -level:v 4.0 -pix_fmt yuv420p -movflags faststart testsrc.mp4
