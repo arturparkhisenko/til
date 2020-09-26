@@ -25,7 +25,7 @@ ffmpeg -i testsrc-progressive-fragmented.mp4 -c copy -f dash -seg_duration 2 exa
 ffmpeg -f lavfi -i testsrc=duration=7.42:size=1280x720:rate=24 -c:v libx264 -profile:v main -level:v 4.0 -pix_fmt yuv420p -movflags faststart testsrc-progressive.mp4
 
 # not progressive or fragmented
-ffmpeg -f lavfi -i testsrc=duration=7.42:size=1280x720:rate=24 -c:v libx264 -profile:v main -level:v 4.0 -pix_fmt yuv420p -movflags faststart testsrc.mp4
+ffmpeg -f lavfi -i testsrc=duration=7.42:size=1280x720:rate=24 -c:v libx264 -profile:v main -level:v 4.0 -pix_fmt yuv420p testsrc-2.mp4
 ```
 
 ## URLs

@@ -4,6 +4,7 @@
  * @see https://www.w3.org/TR/media-source/
  * @see https://www.w3.org/TR/mse-byte-stream-format-isobmff/
  * @see https://www.w3.org/TR/mse-byte-stream-format-mp2t/
+ * Debug using chrome://media-internals/ or @see https://developers.google.com/web/updates/2020/08/devtools
  */
 export class Player {
   /**
@@ -147,21 +148,17 @@ export function getMp4Mvhd(bytes) {
   // Examples with the number 0x12345678 (i.e. 305 419 896 in decimal):
   // little-endian: 0x78 0x56 0x34 0x12, big-endian: 0x12 0x34 0x56 0x78
   // 'A' char code: dec 65, hex 41 (0x41), @see https://www.rapidtables.com/convert/number/hex-to-binary.html
-  // hex 1D_23 -> dec 7459
+  // 2+2 bytes 29_35 -> hex 1D_23 -> dec 7459
   // 11101_00100011 -> 1 + 2 + 32 + 256 + 1024 + 2048 + 4096 -> 7459
 
   // 8 first bits specify the version and next 24 bits specify the flags @see https://app.box.com/s/5nliqsqltj8ym18bvlqtigpwzaey9duq
   version = byteToInt(bytes.slice(dataStart, 4));
   // timescale is in 12 indexes (3 values) from mvhd start
-  timescale = byteToInt(
-    bytes.slice(dataStart + 12, dataStart + 12 + 4)
-  );
+  timescale = byteToInt(bytes.slice(dataStart + 12, dataStart + 12 + 4));
   // duration is in 16 indexes (4 values) from mvhd start
-  duration = byteToInt(
-    bytes.slice(dataStart + 16, dataStart + 16 + 4)
-  );
+  duration = byteToInt(bytes.slice(dataStart + 16, dataStart + 16 + 4));
 
-  return {duration, timescale};
+  return { duration, timescale };
 }
 
 /**
@@ -257,7 +254,7 @@ function onSourceOpen(event, url) {
       let type = 'video/mp4; codecs="avc1.4d4028";';
 
       // For non fragmented mp4 find and set mediaSource.duration
-      let {duration, timescale} = getMp4Mvhd(ui8a);
+      let { duration, timescale } = getMp4Mvhd(ui8a);
       mediaSource.duration = duration / timescale;
 
       // A single SourceBuffer with 1 audio track and/or 1 video track.
