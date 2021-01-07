@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
-    "yargs": "^13.2.4"
+    "axios": "^0.21.1",
+    "yargs": "^16.2.0"
   }
 }
