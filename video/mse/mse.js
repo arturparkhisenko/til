@@ -101,7 +101,7 @@ export function getMpdAttributes(manifestDom) {
  * @param {Array} data
  * @returns {number}
  */
-export function byteToInt(data) {
+export function byteToNumber(data) {
   let i = 0;
   let length = data.length;
   let result = 0;
@@ -110,6 +110,41 @@ export function byteToInt(data) {
     result = result * 256 + data[i];
   }
 
+  return result;
+}
+
+// @see https://developers.google.com/web/updates/2012/06/How-to-convert-ArrayBuffer-to-and-from-String
+function toBytesInt32v1(num) {
+  let arr = new ArrayBuffer(4); // an Int32 takes 4 bytes
+  let view = new DataView(arr);
+  view.setUint32(0, num, false); // byteOffset = 0; litteEndian = false
+  return arr;
+}
+
+function toBytesInt32v2(num) {
+  let arr = new Uint8Array([
+    (num & 0xff000000) >> 24,
+    (num & 0x00ff0000) >> 16,
+    (num & 0x0000ff00) >> 8,
+    num & 0x000000ff,
+  ]);
+  return arr.buffer;
+}
+
+function toBytesInt32toString(num) {
+  let ascii = '';
+  for (let i = 3; i >= 0; i--) {
+    // Bit-wise AND
+    ascii += String.fromCharCode((num >> (8 * i)) & 255);
+  }
+  return ascii;
+}
+
+function fromBytesInt32(numString) {
+  var result = 0;
+  for (let i = 3; i >= 0; i--) {
+    result += numString.charCodeAt(3 - i) << (8 * i);
+  }
   return result;
 }
 
@@ -152,11 +187,11 @@ export function getMp4Mvhd(bytes) {
   // 11101_00100011 -> 1 + 2 + 32 + 256 + 1024 + 2048 + 4096 -> 7459
 
   // 8 first bits specify the version and next 24 bits specify the flags @see https://app.box.com/s/5nliqsqltj8ym18bvlqtigpwzaey9duq
-  version = byteToInt(bytes.slice(dataStart, 4));
+  version = byteToNumber(bytes.slice(dataStart, 4));
   // timescale is in 12 indexes (3 values) from mvhd start
-  timescale = byteToInt(bytes.slice(dataStart + 12, dataStart + 12 + 4));
+  timescale = byteToNumber(bytes.slice(dataStart + 12, dataStart + 12 + 4));
   // duration is in 16 indexes (4 values) from mvhd start
-  duration = byteToInt(bytes.slice(dataStart + 16, dataStart + 16 + 4));
+  duration = byteToNumber(bytes.slice(dataStart + 16, dataStart + 16 + 4));
 
   return { duration, timescale };
 }
