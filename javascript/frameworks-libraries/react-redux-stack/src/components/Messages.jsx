@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 // Components ---------------------------
 import Ul from './Ul';
 import Heading5 from './Heading5';
@@ -14,11 +14,10 @@ const Info = styled.span`
 `;
 
 class Messages extends PureComponent {
-  submitForm (event) {
+  submitForm(event) {
     event.preventDefault();
     console.log(this.input.value);
-    // text, author, timeStamp
-    this.props.addMessage(this.input.value, '1', Date.now());
+    this.props.addMessage(this.input.value, '1');
     this.input.value = '';
   }
 
@@ -28,18 +27,25 @@ class Messages extends PureComponent {
       <Form onSubmit={this.submitForm.bind(this)}>
         <Heading5>Messages:</Heading5>
         <Ul>
-          {this.props.messages.map(message => {
+          {this.props.messages.map((message) => {
             const time = new Date(message.timeStamp);
             const hours = time.getHours();
             const minutes = time.getMinutes();
-            return <li key={message.timeStamp}>
-              <Info>{`${hours}:${minutes} ${message.author} `}</Info>
-              {message.text}</li>;
+            return (
+              <li key={message.timeStamp}>
+                <Info>{`${hours}:${minutes} ${message.author} `}</Info>
+                {message.text}
+              </li>
+            );
           })}
         </Ul>
-        <hr/>
+        <hr />
 
-        <input ref={(input)=> this.input = input} type="text" placeholder="Enter a message"/>
+        <input
+          ref={(input) => (this.input = input)}
+          type="text"
+          placeholder="Enter a message"
+        />
       </Form>
     );
   }

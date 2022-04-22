@@ -1,15 +1,12 @@
-import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-// Components ---------------------------
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+
 import Messages from './../components/Messages';
 import Users from './../containers/Users';
-// Selectors ----------------------------
-import {chatSelector} from './../selectors/selectors';
-// Actions ------------------------------
-import {addUser, addMessage} from './../actions/actions';
-// Styles -------------------------------
-import styled from 'styled-components';
+import { chatSelector } from './../model/selectors';
+import { addMessage } from './../model/messagesSlice';
+import { changeUser } from './../model/actions';
 
 const Content = styled.div`
   display: flex;
@@ -30,8 +27,11 @@ class Chat extends Component {
         <h3>Chat</h3>
 
         <Panels>
-          <Users users={this.props.users} addUser={this.props.addUser}/>
-          <Messages messages={this.props.messages} addMessage={this.props.addMessage}/>
+          <Users addUser={this.props.addUser} users={this.props.users} />
+          <Messages
+            addMessage={this.props.addMessage}
+            messages={this.props.messages}
+          />
         </Panels>
       </Content>
     );
@@ -41,17 +41,12 @@ class Chat extends Component {
 // used a selector below
 // const mapStateToProps = state => {
 //   return {
-//     users: state.reducerUsers,
-//     messages: state.reducerMessages
+//     users: state.users,
+//     messages: state.messages
 //   };
 // };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addUser: bindActionCreators(addUser, dispatch),
-    addMessage: bindActionCreators(addMessage, dispatch)
-  };
-};
+const mapDispatchToProps = { addUser: changeUser, addMessage };
 
 // usual
 //export default connect(mapStateToProps, mapDispatchToProps)(Chat);

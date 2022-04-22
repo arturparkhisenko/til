@@ -5,8 +5,6 @@ import Heading5 from './../components/Heading5';
 // Styles -------------------------------
 import styled from 'styled-components';
 
-// import { createSelector } from 'reselect';
-
 const Content = styled.div`
   display: flex;
   flex-direction: column;
