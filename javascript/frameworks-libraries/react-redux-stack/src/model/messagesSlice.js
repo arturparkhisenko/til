@@ -7,11 +7,6 @@ const initialState = {
       text: 'Hi :)',
       timeStamp: 1234,
     },
-    {
-      author: '@b',
-      text: 'Hello!',
-      timeStamp: 1235,
-    },
   ],
 };
 
@@ -43,6 +38,3 @@ export const messagesSlice = createSlice({
 export const selectMessages = (state) => state.messages.value;
 export const { addMessage, clear } = messagesSlice.actions;
 export default messagesSlice.reducer;
-
-// TODO: try https://redux-toolkit.js.org/api/matching-utilities
-// TODO: try https://redux-toolkit.js.org/api/createSlice#the-extrareducers-map-object-notation

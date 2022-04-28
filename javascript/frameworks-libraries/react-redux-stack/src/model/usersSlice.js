@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = { value: ['@a', '@b', '@c'] };
 
-// TODO: Try Entity Adapter @see https://redux-toolkit.js.org/api/createEntityAdapter
 export const usersSlice = createSlice({
   name: 'users',
   initialState,

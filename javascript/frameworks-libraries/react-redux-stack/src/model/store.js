@@ -11,3 +11,8 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(loggerMiddleware, checkUserMiddleware),
 });
+
+// TODO: list
+// TODO: Try https://redux-toolkit.js.org/api/createEntityAdapter
+// TODO: Try https://redux-toolkit.js.org/api/matching-utilities
+// TODO: Try https://redux-toolkit.js.org/api/createSlice#the-extrareducers-map-object-notation
