@@ -13,6 +13,9 @@ export const store = configureStore({
 });
 
 // TODO: list
+// TODO: Try https://redux-toolkit.js.org/api/createListenerMiddleware
 // TODO: Try https://redux-toolkit.js.org/api/createEntityAdapter
 // TODO: Try https://redux-toolkit.js.org/api/matching-utilities
 // TODO: Try https://redux-toolkit.js.org/api/createSlice#the-extrareducers-map-object-notation
+// TODO: Try https://redux-toolkit.js.org/usage/usage-guide#defining-async-logic-in-slices
+// TODO: Try https://redux-toolkit.js.org/api/createAsyncThunk
