@@ -1,3 +1,5 @@
+import { createListenerMiddleware } from '@reduxjs/toolkit';
+
 import { addUser } from './usersSlice';
 
 // const loggerMiddleware = (store) => {
@@ -24,7 +26,17 @@ const checkUserMiddleware = (store) => (next) => (action) => {
   return returnValue;
 };
 
-// TODO: try async middleware
-// TODO: try https://redux-toolkit.js.org/api/createAsyncThunk
+// Create the middleware instance and methods
+const listenerMiddleware = createListenerMiddleware();
+// Add one or more listener entries that look for specific actions.
+// They may contain any sync or async logic, similar to thunks.
+listenerMiddleware.startListening({
+  actionCreator: addUser,
+  effect: async (action, listenerApi) => {
+    // Run whatever additional side-effect-y logic you want here
+    console.log('User added, payload: ', action.payload);
+    // TODO: can we sleep there?
+  },
+});
 
-export { loggerMiddleware, checkUserMiddleware };
+export { loggerMiddleware, checkUserMiddleware, listenerMiddleware };
