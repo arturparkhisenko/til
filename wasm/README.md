@@ -40,7 +40,7 @@
 
 ### Options [emscripten](https://emscripten.org/docs/tools_reference/emcc.html)
 
-> all options here [settings](https://github.com/emscripten-core/emscripten/blob/master/src/settings.js)
+> all options here [settings](https://github.com/emscripten-core/emscripten/blob/main/src/settings.js)
 
 - `-Os` optimizations (O0, O1, O2, O3, Os, Oz)
 - `-g` generate wast, wasm, wasm.map
@@ -59,16 +59,16 @@
 - [wabt](https://github.com/WebAssembly/wabt) wat2wasm, wasm2wat, wasm-objdump, wasm-interp, wat-desugar, wasm-link
 - [emscripten](https://emscripten.org/)
 - [WasmExplorer](https://mbebenita.github.io/WasmExplorer/)
-- [webassembly.studio](https://webassembly.studio/)
 - [WasmCodeExplorer](https://wasdk.github.io/wasmcodeexplorer/)
-- [WasmFiddle](https://wasdk.github.io/WasmFiddle/)
 - [AssemblyScript](https://github.com/AssemblyScript/assemblyscript)
-- [wasm-pack](https://github.com/rustwasm/wasm-pack)
+- [wasm-pack](https://github.com/drager/wasm-pack)
+- [wasmtime](https://github.com/bytecodealliance/wasmtime)
 
 ## Url's
 
+- [bytecodealliance](https://bytecodealliance.org/)
 - [awesome-wasm](https://github.com/mbasso/awesome-wasm)
-- [cppwasm-book](https://3dgen.cn/cppwasm-book/en/), [source](https://github.com/3dgen/cppwasm-book)
+- [cppwasm-book](https://github.com/3dgen/cppwasm-book)
 - [wasm-reference-manual](https://github.com/sunfishcode/wasm-reference-manual)
 
 ### Articles
@@ -76,15 +76,15 @@
 - [MDN WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly)
 - [rust-to-webassembly](https://hackernoon.com/compiling-rust-to-webassembly-guide-411066a69fde)
 - [cartoon-introduction](https://www.smashingmagazine.com/2017/05/abridged-cartoon-introduction-webassembly/)
-- [first-steps](https://blog.openbloc.fr/webassembly-first-steps/)
+- [first-steps](https://blog.openbloc.com/webassembly-first-steps/)
 - [Real World WebAssembly (Chrome Dev Summit 2017)](https://youtu.be/PpuAqLCraAQ)
 - [asmjs-diet](https://floooh.github.io/2016/08/27/asmjs-diet.html)
 - [wasm how to start, ru](https://medium.com/@reklatsmasters/webassembly-for-beginners-d3ce859cb007)
 - [zandaqo/iswasmfast](https://github.com/zandaqo/iswasmfast)
-- [rust and webassembly in 2019](http://fitzgeraldnick.com/2018/12/14/rust-and-webassembly-in-2019.html)
-- [emscripten-npm](https://developers.google.com/web/updates/2019/01/emscripten-npm)
-- [dev google hotpath-with-wasms](https://developers.google.com/web/updates/2019/02/hotpath-with-wasms)
-- [the-design-of-webassembly](https://medium.freecodecamp.org/the-design-of-webassembly-81f1dcabaddd)
+- [rust and webassembly in 2019](https://fitzgen.com/2018/12/14/rust-and-webassembly-in-2019.html)
+- [emscripten-npm](https://web.dev/articles/emscripten-npm)
+- [dev google hotpath-with-wasms](https://developer.chrome.com/blog/hotpath-with-wasm)
+- [the-design-of-webassembly](https://www.freecodecamp.org/news/the-design-of-webassembly-81f1dcabaddd)
 - Wasm troubles series:
   - [1. wasm-is-not-a-stack-machine](http://troubles.md/posts/wasm-is-not-a-stack-machine/)
   - [2. why-do-we-need-the-relooper-algorithm-again](http://troubles.md/posts/why-do-we-need-the-relooper-algorithm-again/)
