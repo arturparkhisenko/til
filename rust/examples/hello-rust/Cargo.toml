@@ -2,9 +2,9 @@
 name = "hello-rust"
 version = "0.1.0"
 authors = ["arturparkhisenko"]
-edition = "2018"
+edition = "2024"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-ferris-says = "0.1"
+ferris-says = "0.3.2"
